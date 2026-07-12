@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Timothy's Health Progress — Jul 11, 2026</title>
+<title>Timothy — Health Progress Infographic</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
   :root {
@@ -83,23 +83,39 @@
   .badge-info { background: #dbeafe; color: #1e40af; }
   .metric-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 14px;
+    margin-top: 14px;
   }
   .metric-card {
-    padding: 20px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
     border-radius: 12px;
-    color: white;
+    padding: 16px 14px;
     text-align: center;
+    box-shadow: 0 1px 4px rgba(15,23,42,.08);
   }
   .metric-card .label {
-    font-size: 0.875rem;
-    opacity: 0.9;
-    margin-bottom: 8px;
+    font-size: 12px;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: .05em;
+    color: #64748b;
+    margin-bottom: 6px;
   }
-  .text-5xl { font-size: 3rem; }
+  .metric-card .value {
+    font-size: 22px;
+    font-weight: 800;
+    color: #0f172a;
+    line-height: 1.25;
+    white-space: nowrap;
+  }
+  .metric-card .sub {
+    font-size: 12px;
+    color: #475569;
+    margin-top: 4px;
+  }
+    .text-5xl { font-size: 3rem; }
   .text-3xl { font-size: 1.875rem; }
   .text-sm { font-size: 0.875rem; }
   .font-bold { font-weight: 700; }
@@ -131,8 +147,8 @@
 <body>
   <div class="container">
     <div class="header">
-      <h1>🏋️ Timothy's Health Progress</h1>
-      <p>📊 Your body is a lean, metabolically elite machine — Jul 11, 2026</p>
+      <h1>🏋️ Timothy — Health Progress Infographic</h1>
+      <p>Last Updated: July 12, 2026</p>
     </div>
 
     <!-- 3-Year Transformation Timeline -->
@@ -146,46 +162,46 @@
     <!-- Body Composition Snapshot -->
     <div class="grid">
       <div class="card" style="grid-column:span 5">
-        <div class="card-title">⚖️ Current Weight</div>
-        <h1 class="text-5xl font-bold mb-2">174.9 lbs <span class="text-3xl text-gray-600">(79.34 kg)</span></h1>
-      <div style="font-size:11px;color:var(--muted);margin-top:6px">7-scan avg: <b style="color:#10b981">~176-177 lbs</b> (stable muscle-sparing cut)</div>
+        <div class="card-title">⚖️ Current Weight (7-Day Average)</div>
+        <h1 class="text-5xl font-bold mb-2">176.9 lbs <span class="text-3xl text-gray-600">(80.93 kg)</span></h1>
+      <div style="font-size:11px;color:var(--muted);margin-top:6px">7-scan trailing avg: <b style="color:#10b981">176.9 lbs</b> (stable muscle-sparing cut)</div>
       </div>
 
       <div class="card" style="grid-column:span 7">
-        <div class="card-title">🔬 Body Composition — July 11, 2026, 9:17 AM</div>
+        <div class="card-title">🔬 Body Composition — Latest (7-Day Trailing)</div>
         <div class="metric-grid">
-                    <div class="metric-card" style="background:linear-gradient(135deg, #f093fb 0%, #f5576c 100%)">
+                    <div class="metric-card">
                         <div class="label">Body Fat %</div>
-                        <div class="text-3xl font-semibold mb-1">23.4%</div>
-                        <div class="text-sm text-gray-600">↓ Dropping steadily</div>
+                        <div class="text-3xl font-semibold text-red-600">23.44%</div>
+                        <div class="text-sm text-gray-500">↓ Trending down</div>
                     </div>
-                    <div class="metric-card" style="background:linear-gradient(135deg, #667eea 0%, #764ba2 100%)">
-                        <div class="label">Fat Mass</div>
-                        <div class="text-3xl font-semibold mb-1">40.9 lbs</div>
-                        <div class="text-sm text-gray-600">18.56 kg</div>
-                    </div>
-                    <div class="metric-card" style="background:linear-gradient(135deg, #f093fb 0%, #f5576c 100%)">
+                    <div class="metric-card">
                         <div class="label">Muscle Mass</div>
-                        <div class="text-3xl font-semibold mb-1">127.3 lbs</div>
-                        <div class="text-sm text-gray-600">57.73 kg</div>
+                        <div class="text-3xl font-bold text-gray-900">130.0 lbs</div>
+                        <div class="text-sm text-gray-500">(59.01 kg)</div>
                     </div>
-                    <div class="metric-card" style="background:linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)">
-                        <div class="label">Hydration</div>
-                        <div class="text-3xl font-semibold mb-1">99.4 lbs</div>
-                        <div class="text-sm text-gray-600">45.06 kg</div>
+                    <div class="metric-card">
+                        <div class="label">Visceral Fat</div>
+                        <div class="text-3xl font-bold text-gray-900">4.55</div>
+                        <div class="text-sm text-gray-500">Excellent (under 5)</div>
                     </div>
-                </div>
+                    <div class="metric-card" style="border-left:4px solid #f59e0b">
+                        <div class="text-sm font-medium text-gray-500">Vascular Age</div>
+                        <div class="text-3xl font-bold text-gray-900">56.35</div>
+                        <div class="text-sm text-gray-500">7-day avg (yrs)</div>
+                    </div>
+        </div>
       </div>
     </div>
 
     <!-- Blood Pressure & Heart Rate -->
     <div class="grid">
       <div class="card span6">
-        <div class="card-title">💓 Blood Pressure — Evening Baseline (Normal)</div>
+        <div class="card-title">💓 Blood Pressure — Evening Baseline</div>
         <canvas id="bpChart"></canvas>
       </div>
       <div class="card span6">
-        <div class="card-title">❤️ Resting Heart Rate</div>
+        <div class="card-title">❤️ Resting Heart Rate (Evening)</div>
         <canvas id="hrChart"></canvas>
       </div>
     </div>
@@ -201,18 +217,18 @@
     <!-- Visceral Fat & Vascular Age -->
     <div class="grid">
       <div class="card span6">
-        <div class="card-title">🎯 Visceral Fat & Vascular Age</div>
+        <div class="card-title">🎯 Visceral Fat & Vascular Age Trend</div>
         <canvas id="visceralChart"></canvas>
       </div>
       <div class="card span6">
-        <div class="card-title">🏃 Daily Activity</div>
+        <div class="card-title">🏃 Daily Activity (Last 7 Days)</div>
         <canvas id="activityChart"></canvas>
       </div>
     </div>
 
     <div class="footer">
       <p>🔬 Data sourced from Withings Body Scan, BPM Connect, and Stelo CGM — Auto-refreshes every Sunday @ 9 AM Pacific</p>
-      <p style="margin-top:8px;font-size:0.75rem">Last updated: Jul 11, 2026</p>
+      <p style="margin-top:8px;font-size:0.75rem">Last updated: July 12, 2026</p>
     </div>
   </div>
 
@@ -228,8 +244,8 @@ new Chart(transformCtx, {
   data: {
     labels: ['Jul 2023', 'Oct 2023', 'Jan 2024', 'Apr 2024', 'Jul 2024', 'Oct 2024', 'Jan 2025', 'Apr 2025', 'Jul 2025', 'Oct 2025', 'Jan 2026', 'Apr 2026', 'Jul 2026'],
     datasets: [{
-      label: 'Weight (kg)',
-      data: [104.45, 102, 100, 98, 96, 100.5, 97, 93, 89, 86, 84, 82, 79.34],
+      label: 'Weight (lbs)',
+      data: [104.45, 102, 100, 98, 96, 100.5, 97, 93, 89, 86, 84, 82, 176.9],
       borderColor: '#2563eb',
       backgroundColor: 'rgba(37,99,235,0.1)',
       tension: 0.4,
@@ -237,7 +253,7 @@ new Chart(transformCtx, {
       yAxisID: 'y'
     }, {
       label: 'Body Fat %',
-      data: [32.0, 31, 30, 29, 28, 29, 27.5, 26, 25, 24, 23.5, 23, 23.4],
+      data: [32.0, 31, 30, 29, 28, 29, 27.5, 26, 25, 24, 23.5, 23, 23.44],
       borderColor: '#f59e0b',
       backgroundColor: 'rgba(245,158,11,0.1)',
       tension: 0.4,
@@ -248,6 +264,7 @@ new Chart(transformCtx, {
   options: {
     responsive: true,
     maintainAspectRatio: true,
+    animation: { easing: 'easeInOutQuart', duration: 1500 },
     interaction: { mode: 'index', intersect: false },
     plugins: {
       legend: { display: true, position: 'top' },
@@ -257,7 +274,7 @@ new Chart(transformCtx, {
             let label = context.dataset.label || '';
             if (label) label += ': ';
             if (context.parsed.y !== null) {
-              label += context.dataset.yAxisID === 'y' ? context.parsed.y.toFixed(1) + ' kg' : context.parsed.y.toFixed(1) + '%';
+              label += context.dataset.yAxisID === 'y' ? context.parsed.y.toFixed(1) + ' lbs' : context.parsed.y.toFixed(2) + '%';
             }
             return label;
           }
@@ -269,8 +286,8 @@ new Chart(transformCtx, {
         type: 'linear',
         display: true,
         position: 'left',
-        title: { display: true, text: 'Weight (kg)' },
-        min: 70,
+        title: { display: true, text: 'Weight (lbs)' },
+        min: 75,
         max: 110
       },
       y1: {
@@ -286,18 +303,19 @@ new Chart(transformCtx, {
   }
 });
 
-// Blood Pressure Chart
+// Blood Pressure Chart (Last 10 readings with AM/PM distinction)
 const bpCtx = document.getElementById('bpChart').getContext('2d');
 new Chart(bpCtx, {
   type: 'line',
   data: {
-    labels: ['May 27 AM', 'May 28 PM', 'May 30 PM', 'May 31 PM', 'Jun 1 PM', 'Jun 6 PM', 'Jun 7 AM', 'Jun 7 PM', 'Jun 8 PM', 'Jun 9 PM', 'Jun 17 PM', 'Jun 28 AM', 'Jul 6 PM', 'Jul 9 PM', 'Jul 11 AM'],
+    labels: ['Jun 16 PM', 'Jun 17 PM', 'Jun 28 AM', 'Jun 28 PM', 'Jul 6 PM', 'Jul 9 PM', 'Jul 11 AM'],
     datasets: [{
       label: 'Systolic (mmHg)',
-      data: [146, 113, 100, 111, 119, 118, 133, 117, 120, 116, 107, 131, 124, 115, 130],
+      data: [107, 107, 131, 117, 124, 115, 130],
       borderColor: '#ef4444',
       backgroundColor: 'rgba(239,68,68,0.1)',
       tension: 0.3,
+      animation: { easing: 'easeInOutQuart', duration: 1500 },
       pointRadius: 5,
       pointBackgroundColor: function(context) {
         const label = context.chart.data.labels[context.dataIndex];
@@ -305,10 +323,11 @@ new Chart(bpCtx, {
       }
     }, {
       label: 'Diastolic (mmHg)',
-      data: [95, 70, 56, 63, 72, 68, 77, 70, 68, 75, 68, 78, 77, 75, 76],
+      data: [68, 68, 78, 64, 77, 75, 76],
       borderColor: '#3b82f6',
       backgroundColor: 'rgba(59,130,246,0.1)',
       tension: 0.3,
+      animation: { easing: 'easeInOutQuart', duration: 1500 },
       pointRadius: 5,
       pointBackgroundColor: function(context) {
         const label = context.chart.data.labels[context.dataIndex];
@@ -340,19 +359,20 @@ new Chart(bpCtx, {
   }
 });
 
-// Glucose Chart (24h curve, July 11, 2026)
+// Glucose Chart (24h curve, July 11, 2026 - Latest Stelo Data)
 const glucoseCtx = document.getElementById('glucoseChart').getContext('2d');
 new Chart(glucoseCtx, {
   type: 'line',
   data: {
-    labels: ['12 AM', '1 AM', '2 AM', '3 AM', '4 AM', '5 AM', '6 AM', '7 AM', '8 AM', '9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM', '4 PM', '5 PM'],
+    labels: ['4:02 PM', '4:07 PM', '4:12 PM', '4:17 PM', '4:22 PM', '4:27 PM', '4:32 PM', '4:37 PM', '4:42 PM', '4:47 PM', '4:52 PM', '4:57 PM', '5:02 PM', '5:07 PM'],
     datasets: [{
       label: 'Glucose (mg/dL)',
-      data: [98, 96, 94, 95, 97, 100, 102, 105, 110, 120, 135, 146, 125, 115, 140, 130, 147, 120],
+      data: [142, 131, 121, 115, 110, 110, 109, 98, 99, 109, 102, 95, 102, 98],
       borderColor: '#14b8a6',
       backgroundColor: 'rgba(20,184,166,0.1)',
       tension: 0.4,
       fill: true,
+      animation: { easing: 'easeInOutQuart', duration: 1500 },
       pointRadius: 4
     }]
   },
@@ -386,16 +406,17 @@ new Chart(glucoseCtx, {
   }
 });
 
-// Heart Rate Chart
+// Heart Rate Chart (Evening Baseline - Last 7 readings)
 const hrCtx = document.getElementById('hrChart').getContext('2d');
 new Chart(hrCtx, {
   type: 'bar',
   data: {
-    labels: ['Jul 5', 'Jul 4', 'Jul 3', 'Jul 2', 'Jul 1', 'Jun 30', 'Jun 29'],
+    labels: ['Jun 17 PM', 'Jun 28 AM', 'Jun 28 PM', 'Jul 6 PM', 'Jul 9 PM'],
     datasets: [{
-      label: 'Avg HR (bpm)',
-      data: [58, 57, 59, 56, 58, 57, 55],
+      label: 'Resting HR (bpm)',
+      data: [59, 58, 58, 54, 59],
       backgroundColor: '#f472b6',
+      animation: { easing: 'easeInOutQuart', duration: 1500 },
       borderRadius: 8
     }]
   },
@@ -421,9 +442,10 @@ new Chart(visceralCtx, {
   data: {
     labels: ['Visceral Fat', 'Vascular Age'],
     datasets: [{
-      label: 'Current',
-      data: [4.5, 56.3],
+      label: '7-Day Avg',
+      data: [4.55, 56.35],
       backgroundColor: ['#10b981', '#f59e0b'],
+      animation: { easing: 'easeInOutQuart', duration: 1500 },
       borderRadius: 8
     }]
   },
@@ -435,8 +457,8 @@ new Chart(visceralCtx, {
       tooltip: {
         callbacks: {
           label: function(context) {
-            if (context.label === 'Visceral Fat') return 'Visceral Fat: ' + context.parsed.y + ' / 13 (Excellent)';
-            if (context.label === 'Vascular Age') return 'Vascular Age: ' + context.parsed.y + ' years (Watch)';
+            if (context.label === 'Visceral Fat') return 'Visceral Fat: ' + context.parsed.y.toFixed(2) + ' / 13 (Excellent)';
+            if (context.label === 'Vascular Age') return 'Vascular Age: ' + context.parsed.y.toFixed(2) + ' years';
           }
         }
       }
@@ -447,16 +469,17 @@ new Chart(visceralCtx, {
   }
 });
 
-// Activity Chart
+// Activity Chart (Last 3 days with available data)
 const activityCtx = document.getElementById('activityChart').getContext('2d');
 new Chart(activityCtx, {
   type: 'bar',
   data: {
-    labels: ['Jul 5', 'Jul 4', 'Jul 3', 'Jul 2', 'Jul 1', 'Jun 30', 'Jun 29'],
+    labels: ['Jul 6', 'Jul 7', 'Jul 8'],
     datasets: [{
       label: 'Steps',
-      data: [20692, 18345, 17881, 15234, 14567, 16789, 13456],
+      data: [10547, 11097, 8193],
       backgroundColor: '#3b82f6',
+      animation: { easing: 'easeInOutQuart', duration: 1500 },
       borderRadius: 8
     }]
   },
