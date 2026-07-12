@@ -194,13 +194,18 @@
       </div>
     </div>
 
-    <!-- Blood Pressure & Heart Rate -->
+    <!-- Multi-Year Blood Pressure Preview -->
     <div class="grid">
-      <div class="card span6">
-        <div class="card-title">💓 Blood Pressure — Evening Baseline</div>
+      <div class="card span12">
+        <div class="card-title">💓 2-Year Blood Pressure Preview (July 2024 → July 2026)</div>
         <canvas id="bpChart"></canvas>
+        <p style="margin-top:14px;color:var(--muted);font-size:.85rem">Monthly medians from deduplicated Withings readings; gaps indicate months without measurements. The amber reference zones show AHA Stage 1 ranges: systolic 130–139 or diastolic 80–89 mmHg. Because the historical series mixes measurement times, it is a trend preview—not a standardized home-BP average; recent evening readings remain the cleanest resting baseline.</p>
       </div>
-      <div class="card span6">
+    </div>
+
+    <!-- Heart Rate -->
+    <div class="grid">
+      <div class="card span12">
         <div class="card-title">❤️ Resting Heart Rate (Evening)</div>
         <canvas id="hrChart"></canvas>
       </div>
@@ -245,7 +250,7 @@ new Chart(transformCtx, {
     labels: ['Jul 2023', 'Oct 2023', 'Jan 2024', 'Apr 2024', 'Jul 2024', 'Oct 2024', 'Jan 2025', 'Apr 2025', 'Jul 2025', 'Oct 2025', 'Jan 2026', 'Apr 2026', 'Jul 2026'],
     datasets: [{
       label: 'Weight (lbs)',
-      data: [230.3, 224.9, 220.5, 216.1, 211.6, 221.6, 213.8, 205.0, 196.2, 189.6, 185.2, 180.8, 176.9],
+      data: [230.3, 224.9, 220.5, 216.1, 211.6, 221.6, 213.8, 205.0, 196.2, 189.6, 185.2, 180.8, 174.9],
       borderColor: '#2563eb',
       backgroundColor: 'rgba(37,99,235,0.1)',
       tension: 0.4,
@@ -303,57 +308,89 @@ new Chart(transformCtx, {
   }
 });
 
-// Blood Pressure Chart (Last 10 readings with AM/PM distinction)
+// 2-Year Blood Pressure Preview — monthly medians from deduplicated readings
 const bpCtx = document.getElementById('bpChart').getContext('2d');
+const bpMonthlyCounts = [10,2,6,2,2,0,4,1,0,2,0,0,0,0,1,0,19,36,9,4,4,3,6,9,3];
+const bpStageBands = {
+  id: 'bpStageBands',
+  beforeDatasetsDraw(chart) {
+    const {ctx, chartArea, scales: {y}} = chart;
+    if (!chartArea) return;
+    const drawBand = (low, high, color, label) => {
+      const top = y.getPixelForValue(high);
+      const bottom = y.getPixelForValue(low);
+      ctx.save();
+      ctx.fillStyle = color;
+      ctx.fillRect(chartArea.left, top, chartArea.right - chartArea.left, bottom - top);
+      ctx.fillStyle = 'rgba(146,64,14,.78)';
+      ctx.font = '600 11px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+      ctx.textAlign = 'right';
+      ctx.fillText(label, chartArea.right - 8, top + 13);
+      ctx.restore();
+    };
+    drawBand(130, 139, 'rgba(245,158,11,.14)', 'Stage 1 systolic 130–139');
+    drawBand(80, 89, 'rgba(245,158,11,.10)', 'Stage 1 diastolic 80–89');
+  }
+};
 new Chart(bpCtx, {
   type: 'line',
+  plugins: [bpStageBands],
   data: {
-    labels: ['Jun 16 PM', 'Jun 17 PM', 'Jun 28 AM', 'Jun 28 PM', 'Jul 6 PM', 'Jul 9 PM', 'Jul 11 AM'],
+    labels: ['Jul 24','Aug 24','Sep 24','Oct 24','Nov 24','Dec 24','Jan 25','Feb 25','Mar 25','Apr 25','May 25','Jun 25','Jul 25','Aug 25','Sep 25','Oct 25','Nov 25','Dec 25','Jan 26','Feb 26','Mar 26','Apr 26','May 26','Jun 26','Jul 26'],
     datasets: [{
-      label: 'Systolic (mmHg)',
-      data: [107, 107, 131, 117, 124, 115, 130],
+      label: 'Monthly median systolic',
+      data: [154.5,150,140.5,143,152,null,149,130,null,142.5,null,null,null,null,145,null,134,133,129,137.5,123,125,123.5,118,124],
       borderColor: '#ef4444',
-      backgroundColor: 'rgba(239,68,68,0.1)',
-      tension: 0.3,
-      animation: { easing: 'easeInOutQuart', duration: 1500 },
-      pointRadius: 5,
-      pointBackgroundColor: function(context) {
-        const label = context.chart.data.labels[context.dataIndex];
-        return label.includes('AM') ? '#f59e0b' : '#10b981';
-      }
+      backgroundColor: 'rgba(239,68,68,.08)',
+      tension: .32,
+      spanGaps: false,
+      borderWidth: 3,
+      pointRadius: 4,
+      pointHoverRadius: 6,
+      pointBackgroundColor: '#ef4444'
     }, {
-      label: 'Diastolic (mmHg)',
-      data: [68, 68, 78, 64, 77, 75, 76],
-      borderColor: '#3b82f6',
-      backgroundColor: 'rgba(59,130,246,0.1)',
-      tension: 0.3,
-      animation: { easing: 'easeInOutQuart', duration: 1500 },
-      pointRadius: 5,
-      pointBackgroundColor: function(context) {
-        const label = context.chart.data.labels[context.dataIndex];
-        return label.includes('AM') ? '#f59e0b' : '#10b981';
-      }
+      label: 'Monthly median diastolic',
+      data: [104.5,101.5,92,86.5,94.5,null,94.5,77,null,91.5,null,null,null,null,94,null,87,85,75,78,74,74,80.5,70,76],
+      borderColor: '#2563eb',
+      backgroundColor: 'rgba(37,99,235,.08)',
+      tension: .32,
+      spanGaps: false,
+      borderWidth: 3,
+      pointRadius: 4,
+      pointHoverRadius: 6,
+      pointBackgroundColor: '#2563eb'
     }]
   },
   options: {
     responsive: true,
     maintainAspectRatio: true,
+    animation: { easing: 'easeInOutQuart', duration: 1500 },
+    interaction: { mode: 'index', intersect: false },
     plugins: {
       legend: { display: true, position: 'top' },
       tooltip: {
+        filter: context => context.parsed.y !== null,
         callbacks: {
-          label: function(context) {
-            return context.dataset.label + ': ' + context.parsed.y + ' mmHg';
+          label: context => context.dataset.label + ': ' + context.parsed.y.toFixed(1) + ' mmHg',
+          afterBody: items => {
+            if (!items.length) return '';
+            const count = bpMonthlyCounts[items[0].dataIndex];
+            return count ? count + (count === 1 ? ' reading' : ' readings') + ' after exact-duplicate removal' : 'No readings this month';
           }
         }
       }
     },
     scales: {
+      x: {
+        ticks: { maxRotation: 45, minRotation: 0, autoSkip: true, maxTicksLimit: 13 },
+        grid: { color: 'rgba(148,163,184,.15)' }
+      },
       y: {
         beginAtZero: false,
-        min: 50,
-        max: 150,
-        title: { display: true, text: 'mmHg' }
+        min: 60,
+        max: 175,
+        title: { display: true, text: 'Blood pressure (mmHg)' },
+        grid: { color: 'rgba(148,163,184,.18)' }
       }
     }
   }
