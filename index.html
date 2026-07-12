@@ -154,27 +154,27 @@
       <div class="card" style="grid-column:span 7">
         <div class="card-title">🔬 Body Composition — July 11, 2026, 9:17 AM</div>
         <div class="metric-grid">
-                    <div class="metric-card" style="background:linear-gradient(135deg, #f093fb 0%, #f5576c 100%)">
+                    <div class="metric-card" style="background:#fef2f2;">
                         <div class="label">Body Fat %</div>
-                        <div class="text-3xl font-semibold mb-1">23.4%</div>
-                        <div class="text-sm text-gray-600">↓ Dropping steadily</div>
+                        <div class="text-3xl font-semibold text-red-600">23.4%</div>
+                        <div class="text-sm text-gray-500">&#8595; Dropping steadily</div>
                     </div>
-                    <div class="metric-card" style="background:linear-gradient(135deg, #667eea 0%, #764ba2 100%)">
+                    <div class="metric-card" style="background:#fff7ed;">
                         <div class="label">Fat Mass</div>
-                        <div class="text-3xl font-semibold mb-1">40.9 lbs</div>
-                        <div class="text-sm text-gray-600">18.56 kg</div>
+                        <div class="text-3xl font-bold text-gray-900">40.9 lbs</div>
+                        <div class="text-sm text-gray-500">(18.56 kg)</div>
                     </div>
-                    <div class="metric-card" style="background:linear-gradient(135deg, #f093fb 0%, #f5576c 100%)">
+                    <div class="metric-card" style="background:#eff6ff;">
                         <div class="label">Muscle Mass</div>
-                        <div class="text-3xl font-semibold mb-1">127.3 lbs</div>
-                        <div class="text-sm text-gray-600">57.73 kg</div>
+                        <div class="text-3xl font-bold text-gray-900">127.3 lbs (57.73 kg)</div>
+                        <div class="text-sm text-gray-500">Holding strong</div>
                     </div>
-                    <div class="metric-card" style="background:linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)">
+                    <div class="metric-card" style="background:#ecfeff;">
                         <div class="label">Hydration</div>
-                        <div class="text-3xl font-semibold mb-1">99.4 lbs</div>
-                        <div class="text-sm text-gray-600">45.06 kg</div>
+                        <div class="text-3xl font-bold text-gray-900">57%</div>
+                        <div class="text-sm text-gray-500">TBW</div>
                     </div>
-                </div>
+        </div>
       </div>
     </div>
 
@@ -228,7 +228,7 @@ new Chart(transformCtx, {
   data: {
     labels: ['Jul 2023', 'Oct 2023', 'Jan 2024', 'Apr 2024', 'Jul 2024', 'Oct 2024', 'Jan 2025', 'Apr 2025', 'Jul 2025', 'Oct 2025', 'Jan 2026', 'Apr 2026', 'Jul 2026'],
     datasets: [{
-      label: 'Weight (kg)',
+      label: 'Weight (lbs)',
       data: [104.45, 102, 100, 98, 96, 100.5, 97, 93, 89, 86, 84, 82, 79.34],
       borderColor: '#2563eb',
       backgroundColor: 'rgba(37,99,235,0.1)',
