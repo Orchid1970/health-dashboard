@@ -148,7 +148,7 @@
   <div class="container">
     <div class="header">
       <h1>🏋️ Timothy — Health Progress Infographic</h1>
-      <p>Last Updated: July 12, 2026</p>
+      <p>Last Updated: July 20, 2026</p>
     </div>
 
     <!-- 3-Year Transformation Timeline -->
@@ -163,8 +163,8 @@
     <div class="grid">
       <div class="card" style="grid-column:span 5">
         <div class="card-title">⚖️ Current Weight (7-Day Average)</div>
-        <h1 class="text-5xl font-bold mb-2">176.9 lbs <span class="text-3xl text-gray-600">(80.93 kg)</span></h1>
-      <div style="font-size:11px;color:var(--muted);margin-top:6px">7-scan trailing avg: <b style="color:#10b981">176.9 lbs</b> (stable muscle-sparing cut)</div>
+        <h1 class="text-5xl font-bold mb-2">176.3 lbs <span class="text-3xl text-gray-600">(80.04 kg)</span></h1>
+      <div style="font-size:11px;color:var(--muted);margin-top:6px">7-scan trailing avg: <b style="color:#10b981">176.3 lbs</b> (stable muscle-sparing cut)</div>
       </div>
 
       <div class="card" style="grid-column:span 7">
@@ -172,22 +172,22 @@
         <div class="metric-grid">
                     <div class="metric-card">
                         <div class="label">Body Fat %</div>
-                        <div class="text-3xl font-semibold text-red-600">23.44%</div>
+                        <div class="text-3xl font-semibold text-red-600">23.38%</div>
                         <div class="text-sm text-gray-500">↓ Trending down</div>
                     </div>
                     <div class="metric-card">
                         <div class="label">Muscle Mass</div>
-                        <div class="text-3xl font-bold text-gray-900">130.0 lbs</div>
-                        <div class="text-sm text-gray-500">(59.01 kg)</div>
+                        <div class="text-3xl font-bold text-gray-900">129.5 lbs</div>
+                        <div class="text-sm text-gray-500">(58.74 kg)</div>
                     </div>
                     <div class="metric-card">
                         <div class="label">Visceral Fat</div>
-                        <div class="text-3xl font-bold text-gray-900">4.55</div>
+                        <div class="text-3xl font-bold text-gray-900">4.54</div>
                         <div class="text-sm text-gray-500">Excellent (under 5)</div>
                     </div>
                     <div class="metric-card" style="border-left:4px solid #f59e0b">
                         <div class="text-sm font-medium text-gray-500">Vascular Age</div>
-                        <div class="text-3xl font-bold text-gray-900">56.35</div>
+                        <div class="text-3xl font-bold text-gray-900">55.91</div>
                         <div class="text-sm text-gray-500">7-day avg (yrs)</div>
                     </div>
         </div>
@@ -233,7 +233,7 @@
 
     <div class="footer">
       <p>🔬 Data sourced from Withings Body Scan, BPM Connect, and Stelo CGM — Auto-refreshes every Sunday @ 9 AM Pacific</p>
-      <p style="margin-top:8px;font-size:0.75rem">Last updated: July 12, 2026</p>
+      <p style="margin-top:8px;font-size:0.75rem">Last updated: July 20, 2026</p>
     </div>
   </div>
 
@@ -250,7 +250,7 @@ new Chart(transformCtx, {
     labels: ['Jul 2023', 'Oct 2023', 'Jan 2024', 'Apr 2024', 'Jul 2024', 'Oct 2024', 'Jan 2025', 'Apr 2025', 'Jul 2025', 'Oct 2025', 'Jan 2026', 'Apr 2026', 'Jul 2026'],
     datasets: [{
       label: 'Weight (lbs)',
-      data: [230.3, 224.9, 220.5, 216.1, 211.6, 221.6, 213.8, 205.0, 196.2, 189.6, 185.2, 180.8, 174.9],
+      data: [230.3, 224.9, 220.5, 216.1, 211.6, 221.6, 213.8, 205.0, 196.2, 189.6, 185.2, 180.8, 176.3],
       borderColor: '#2563eb',
       backgroundColor: 'rgba(37,99,235,0.1)',
       tension: 0.4,
@@ -258,7 +258,7 @@ new Chart(transformCtx, {
       yAxisID: 'y'
     }, {
       label: 'Body Fat %',
-      data: [32.0, 31, 30, 29, 28, 29, 27.5, 26, 25, 24, 23.5, 23, 23.44],
+      data: [32.0, 31, 30, 29, 28, 29, 27.5, 26, 25, 24, 23.5, 23, 23.38],
       borderColor: '#f59e0b',
       backgroundColor: 'rgba(245,158,11,0.1)',
       tension: 0.4,
@@ -480,7 +480,7 @@ new Chart(visceralCtx, {
     labels: ['Visceral Fat', 'Vascular Age'],
     datasets: [{
       label: '7-Day Avg',
-      data: [4.55, 56.35],
+      data: [4.54, 55.91],
       backgroundColor: ['#10b981', '#f59e0b'],
       animation: { easing: 'easeInOutQuart', duration: 1500 },
       borderRadius: 8
@@ -511,10 +511,10 @@ const activityCtx = document.getElementById('activityChart').getContext('2d');
 new Chart(activityCtx, {
   type: 'bar',
   data: {
-    labels: ['Jul 6', 'Jul 7', 'Jul 8'],
+    labels: ['Jul 6', 'Jul 7', 'Jul 8', 'Jul 9', 'Jul 10', 'Jul 11', 'Jul 12'],
     datasets: [{
       label: 'Steps',
-      data: [10547, 11097, 8193],
+      data: [10547, 11097, 8193, 20692, 18345, 17881, 11192],
       backgroundColor: '#3b82f6',
       animation: { easing: 'easeInOutQuart', duration: 1500 },
       borderRadius: 8
