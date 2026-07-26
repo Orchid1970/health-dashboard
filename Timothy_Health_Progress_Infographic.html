@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Timothy — Health Progress Infographic</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --primary: #2563eb;
+    --secondary: #7c3aed;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --muted: #6b7280;
+    --bg: #f9fafb;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: #111827;
+    padding: 24px;
+    line-height: 1.6;
+  }
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+    padding: 32px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(37,99,235,0.3);
+  }
+  .header h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+  .header p {
+    font-size: 1.25rem;
+    opacity: 0.95;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+  .card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  }
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: #1f2937;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+  .badge-success { background: #d1fae5; color: #065f46; }
+  .badge-warning { background: #fef3c7; color: #92400e; }
+  .badge-info { background: #dbeafe; color: #1e40af; }
+  .metric-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 14px;
+    margin-top: 14px;
+  }
+  .metric-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 16px 14px;
+    text-align: center;
+    box-shadow: 0 1px 4px rgba(15,23,42,.08);
+  }
+  .metric-card .label {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: #64748b;
+    margin-bottom: 6px;
+  }
+  .metric-card .value {
+    font-size: 22px;
+    font-weight: 800;
+    color: #0f172a;
+    line-height: 1.25;
+    white-space: nowrap;
+  }
+  .metric-card .sub {
+    font-size: 12px;
+    color: #475569;
+    margin-top: 4px;
+  }
+    .text-5xl { font-size: 3rem; }
+  .text-3xl { font-size: 1.875rem; }
+  .text-sm { font-size: 0.875rem; }
+  .font-bold { font-weight: 700; }
+  .font-semibold { font-weight: 600; }
+  .mb-1 { margin-bottom: 0.25rem; }
+  .mb-2 { margin-bottom: 0.5rem; }
+  .text-gray-600 { color: #4b5563; }
+  .span4 { grid-column: span 4; }
+  .span5 { grid-column: span 5; }
+  .span6 { grid-column: span 6; }
+  .span12 { grid-column: span 12; }
+  canvas { max-height: 350px; }
+  .footer {
+    text-align: center;
+    margin-top: 48px;
+    padding: 24px;
+    background: white;
+    border-radius: 12px;
+    color: var(--muted);
+    font-size: 0.875rem;
+  }
+  @media (max-width: 768px) {
+    .grid { grid-template-columns: 1fr; }
+    .span4, .span5, .span6, .span12 { grid-column: span 1; }
+    .header h1 { font-size: 2rem; }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🏋️ Timothy — Health Progress Infographic</h1>
+      <p>Last Updated: July 20, 2026</p>
+    </div>
+
+    <!-- 3-Year Transformation Timeline -->
+    <div class="grid">
+      <div class="card span12">
+        <div class="card-title">📈 3-Year Transformation Timeline (July 2023 → July 2026)</div>
+        <canvas id="transformChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Body Composition Snapshot -->
+    <div class="grid">
+      <div class="card" style="grid-column:span 5">
+        <div class="card-title">⚖️ Current Weight (7-Day Average)</div>
+        <h1 class="text-5xl font-bold mb-2">176.3 lbs <span class="text-3xl text-gray-600">(80.04 kg)</span></h1>
+      <div style="font-size:11px;color:var(--muted);margin-top:6px">7-scan trailing avg: <b style="color:#10b981">176.3 lbs</b> (stable muscle-sparing cut)</div>
+      </div>
+
+      <div class="card" style="grid-column:span 7">
+        <div class="card-title">🔬 Body Composition — Latest (7-Day Trailing)</div>
+        <div class="metric-grid">
+                    <div class="metric-card">
+                        <div class="label">Body Fat %</div>
+                        <div class="text-3xl font-semibold text-red-600">23.38%</div>
+                        <div class="text-sm text-gray-500">↓ Trending down</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">Muscle Mass</div>
+                        <div class="text-3xl font-bold text-gray-900">129.5 lbs</div>
+                        <div class="text-sm text-gray-500">(58.74 kg)</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="label">Visceral Fat</div>
+                        <div class="text-3xl font-bold text-gray-900">4.54</div>
+                        <div class="text-sm text-gray-500">Excellent (under 5)</div>
+                    </div>
+                    <div class="metric-card" style="border-left:4px solid #f59e0b">
+                        <div class="text-sm font-medium text-gray-500">Vascular Age</div>
+                        <div class="text-3xl font-bold text-gray-900">55.91</div>
+                        <div class="text-sm text-gray-500">7-day avg (yrs)</div>
+                    </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Multi-Year Blood Pressure Preview -->
+    <div class="grid">
+      <div class="card span12">
+        <div class="card-title">💓 2-Year Blood Pressure Preview (July 2024 → July 2026)</div>
+        <canvas id="bpChart"></canvas>
+        <p style="margin-top:14px;color:var(--muted);font-size:.85rem">Monthly medians from deduplicated Withings readings; gaps indicate months without measurements. The amber reference zones show AHA Stage 1 ranges: systolic 130–139 or diastolic 80–89 mmHg. Because the historical series mixes measurement times, it is a trend preview—not a standardized home-BP average; recent evening readings remain the cleanest resting baseline.</p>
+      </div>
+    </div>
+
+    <!-- Heart Rate -->
+    <div class="grid">
+      <div class="card span12">
+        <div class="card-title">❤️ Resting Heart Rate (Evening)</div>
+        <canvas id="hrChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Glucose Chart -->
+    <div class="grid">
+      <div class="card span12">
+        <div class="card-title">🩸 Glucose — Stelo CGM (24h, July 11, 2026)</div>
+        <canvas id="glucoseChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Visceral Fat & Vascular Age -->
+    <div class="grid">
+      <div class="card span6">
+        <div class="card-title">🎯 Visceral Fat & Vascular Age Trend</div>
+        <canvas id="visceralChart"></canvas>
+      </div>
+      <div class="card span6">
+        <div class="card-title">🏃 Daily Activity (Last 7 Days)</div>
+        <canvas id="activityChart"></canvas>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>🔬 Data sourced from Withings Body Scan, BPM Connect, and Stelo CGM — Auto-refreshes every Sunday @ 9 AM Pacific</p>
+      <p style="margin-top:8px;font-size:0.75rem">Last updated: July 20, 2026</p>
+    </div>
+  </div>
+
+<script>
+Chart.defaults.font.family = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+Chart.defaults.font.size = 13;
+Chart.defaults.color = '#374151';
+
+// 3-Year Transformation Timeline (July 2023 → July 2026)
+const transformCtx = document.getElementById('transformChart').getContext('2d');
+new Chart(transformCtx, {
+  type: 'line',
+  data: {
+    labels: ['Jul 2023', 'Oct 2023', 'Jan 2024', 'Apr 2024', 'Jul 2024', 'Oct 2024', 'Jan 2025', 'Apr 2025', 'Jul 2025', 'Oct 2025', 'Jan 2026', 'Apr 2026', 'Jul 2026'],
+    datasets: [{
+      label: 'Weight (lbs)',
+      data: [230.3, 224.9, 220.5, 216.1, 211.6, 221.6, 213.8, 205.0, 196.2, 189.6, 185.2, 180.8, 176.3],
+      borderColor: '#2563eb',
+      backgroundColor: 'rgba(37,99,235,0.1)',
+      tension: 0.4,
+      fill: true,
+      yAxisID: 'y'
+    }, {
+      label: 'Body Fat %',
+      data: [32.0, 31, 30, 29, 28, 29, 27.5, 26, 25, 24, 23.5, 23, 23.38],
+      borderColor: '#f59e0b',
+      backgroundColor: 'rgba(245,158,11,0.1)',
+      tension: 0.4,
+      fill: true,
+      yAxisID: 'y1'
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: true,
+    animation: { easing: 'easeInOutQuart', duration: 1500 },
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: { display: true, position: 'top' },
+      tooltip: {
+        callbacks: {
+          label: function(context) {
+            let label = context.dataset.label || '';
+            if (label) label += ': ';
+            if (context.parsed.y !== null) {
+              label += context.dataset.yAxisID === 'y' ? context.parsed.y.toFixed(1) + ' lbs' : context.parsed.y.toFixed(2) + '%';
+            }
+            return label;
+          }
+        }
+      }
+    },
+    scales: {
+      y: {
+        type: 'linear',
+        display: true,
+        position: 'left',
+        title: { display: true, text: 'Weight (lbs)' },
+        min: 165,
+        max: 240
+      },
+      y1: {
+        type: 'linear',
+        display: true,
+        position: 'right',
+        title: { display: true, text: 'Body Fat %' },
+        min: 20,
+        max: 35,
+        grid: { drawOnChartArea: false }
+      }
+    }
+  }
+});
+
+// 2-Year Blood Pressure Preview — monthly medians from deduplicated readings
+const bpCtx = document.getElementById('bpChart').getContext('2d');
+const bpMonthlyCounts = [10,2,6,2,2,0,4,1,0,2,0,0,0,0,1,0,19,36,9,4,4,3,6,9,3];
+const bpStageBands = {
+  id: 'bpStageBands',
+  beforeDatasetsDraw(chart) {
+    const {ctx, chartArea, scales: {y}} = chart;
+    if (!chartArea) return;
+    const drawBand = (low, high, color, label) => {
+      const top = y.getPixelForValue(high);
+      const bottom = y.getPixelForValue(low);
+      ctx.save();
+      ctx.fillStyle = color;
+      ctx.fillRect(chartArea.left, top, chartArea.right - chartArea.left, bottom - top);
+      ctx.fillStyle = 'rgba(146,64,14,.78)';
+      ctx.font = '600 11px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+      ctx.textAlign = 'right';
+      ctx.fillText(label, chartArea.right - 8, top + 13);
+      ctx.restore();
+    };
+    drawBand(130, 139, 'rgba(245,158,11,.14)', 'Stage 1 systolic 130–139');
+    drawBand(80, 89, 'rgba(245,158,11,.10)', 'Stage 1 diastolic 80–89');
+  }
+};
+new Chart(bpCtx, {
+  type: 'line',
+  plugins: [bpStageBands],
+  data: {
+    labels: ['Jul 24','Aug 24','Sep 24','Oct 24','Nov 24','Dec 24','Jan 25','Feb 25','Mar 25','Apr 25','May 25','Jun 25','Jul 25','Aug 25','Sep 25','Oct 25','Nov 25','Dec 25','Jan 26','Feb 26','Mar 26','Apr 26','May 26','Jun 26','Jul 26'],
+    datasets: [{
+      label: 'Monthly median systolic',
+      data: [154.5,150,140.5,143,152,null,149,130,null,142.5,null,null,null,null,145,null,134,133,129,137.5,123,125,123.5,118,124],
+      borderColor: '#ef4444',
+      backgroundColor: 'rgba(239,68,68,.08)',
+      tension: .32,
+      spanGaps: false,
+      borderWidth: 3,
+      pointRadius: 4,
+      pointHoverRadius: 6,
+      pointBackgroundColor: '#ef4444'
+    }, {
+      label: 'Monthly median diastolic',
+      data: [104.5,101.5,92,86.5,94.5,null,94.5,77,null,91.5,null,null,null,null,94,null,87,85,75,78,74,74,80.5,70,76],
+      borderColor: '#2563eb',
+      backgroundColor: 'rgba(37,99,235,.08)',
+      tension: .32,
+      spanGaps: false,
+      borderWidth: 3,
+      pointRadius: 4,
+      pointHoverRadius: 6,
+      pointBackgroundColor: '#2563eb'
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: true,
+    animation: { easing: 'easeInOutQuart', duration: 1500 },
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: { display: true, position: 'top' },
+      tooltip: {
+        filter: context => context.parsed.y !== null,
+        callbacks: {
+          label: context => context.dataset.label + ': ' + context.parsed.y.toFixed(1) + ' mmHg',
+          afterBody: items => {
+            if (!items.length) return '';
+            const count = bpMonthlyCounts[items[0].dataIndex];
+            return count ? count + (count === 1 ? ' reading' : ' readings') + ' after exact-duplicate removal' : 'No readings this month';
+          }
+        }
+      }
+    },
+    scales: {
+      x: {
+        ticks: { maxRotation: 45, minRotation: 0, autoSkip: true, maxTicksLimit: 13 },
+        grid: { color: 'rgba(148,163,184,.15)' }
+      },
+      y: {
+        beginAtZero: false,
+        min: 60,
+        max: 175,
+        title: { display: true, text: 'Blood pressure (mmHg)' },
+        grid: { color: 'rgba(148,163,184,.18)' }
+      }
+    }
+  }
+});
+
+// Glucose Chart (24h curve, July 11, 2026 - Latest Stelo Data)
+const glucoseCtx = document.getElementById('glucoseChart').getContext('2d');
+new Chart(glucoseCtx, {
+  type: 'line',
+  data: {
+    labels: ['4:02 PM', '4:07 PM', '4:12 PM', '4:17 PM', '4:22 PM', '4:27 PM', '4:32 PM', '4:37 PM', '4:42 PM', '4:47 PM', '4:52 PM', '4:57 PM', '5:02 PM', '5:07 PM'],
+    datasets: [{
+      label: 'Glucose (mg/dL)',
+      data: [142, 131, 121, 115, 110, 110, 109, 98, 99, 109, 102, 95, 102, 98],
+      borderColor: '#14b8a6',
+      backgroundColor: 'rgba(20,184,166,0.1)',
+      tension: 0.4,
+      fill: true,
+      animation: { easing: 'easeInOutQuart', duration: 1500 },
+      pointRadius: 4
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: function(context) {
+            return 'Glucose: ' + context.parsed.y + ' mg/dL';
+          }
+        }
+      }
+    },
+    scales: {
+      y: {
+        beginAtZero: false,
+        min: 70,
+        max: 180,
+        title: { display: true, text: 'mg/dL' },
+        ticks: {
+          callback: function(value) {
+            if (value === 70 || value === 180) return value + ' (range limit)';
+            return value;
+          }
+        }
+      }
+    }
+  }
+});
+
+// Heart Rate Chart (Evening Baseline - Last 7 readings)
+const hrCtx = document.getElementById('hrChart').getContext('2d');
+new Chart(hrCtx, {
+  type: 'bar',
+  data: {
+    labels: ['Jun 17 PM', 'Jun 28 AM', 'Jun 28 PM', 'Jul 6 PM', 'Jul 9 PM'],
+    datasets: [{
+      label: 'Resting HR (bpm)',
+      data: [59, 58, 58, 54, 59],
+      backgroundColor: '#f472b6',
+      animation: { easing: 'easeInOutQuart', duration: 1500 },
+      borderRadius: 8
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: true,
+    plugins: { legend: { display: false } },
+    scales: {
+      y: {
+        beginAtZero: false,
+        min: 50,
+        max: 80,
+        title: { display: true, text: 'BPM' }
+      }
+    }
+  }
+});
+
+// Visceral Fat & Vascular Age Chart
+const visceralCtx = document.getElementById('visceralChart').getContext('2d');
+new Chart(visceralCtx, {
+  type: 'bar',
+  data: {
+    labels: ['Visceral Fat', 'Vascular Age'],
+    datasets: [{
+      label: '7-Day Avg',
+      data: [4.54, 55.91],
+      backgroundColor: ['#10b981', '#f59e0b'],
+      animation: { easing: 'easeInOutQuart', duration: 1500 },
+      borderRadius: 8
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: function(context) {
+            if (context.label === 'Visceral Fat') return 'Visceral Fat: ' + context.parsed.y.toFixed(2) + ' / 13 (Excellent)';
+            if (context.label === 'Vascular Age') return 'Vascular Age: ' + context.parsed.y.toFixed(2) + ' years';
+          }
+        }
+      }
+    },
+    scales: {
+      y: { beginAtZero: true }
+    }
+  }
+});
+
+// Activity Chart (Last 3 days with available data)
+const activityCtx = document.getElementById('activityChart').getContext('2d');
+new Chart(activityCtx, {
+  type: 'bar',
+  data: {
+    labels: ['Jul 6', 'Jul 7', 'Jul 8', 'Jul 9', 'Jul 10', 'Jul 11', 'Jul 12'],
+    datasets: [{
+      label: 'Steps',
+      data: [10547, 11097, 8193, 20692, 18345, 17881, 11192],
+      backgroundColor: '#3b82f6',
+      animation: { easing: 'easeInOutQuart', duration: 1500 },
+      borderRadius: 8
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: function(context) {
+            return context.parsed.y.toLocaleString() + ' steps';
+          }
+        }
+      }
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        title: { display: true, text: 'Steps' }
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>
