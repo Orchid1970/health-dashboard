@@ -148,7 +148,7 @@
   <div class="container">
     <div class="header">
       <h1>🏋️ Timothy — Health Progress Infographic</h1>
-      <p>Last Updated: July 26, 2026</p>
+      <p>Last Updated: July 29, 2026</p>
     </div>
 
     <!-- 3-Year Transformation Timeline -->
@@ -214,8 +214,21 @@
     <!-- Glucose Chart -->
     <div class="grid">
       <div class="card span12">
-        <div class="card-title">🩸 Glucose — Stelo CGM (7-day avg, July 26, 2026)</div>
+        <div class="card-title">🩸 Glucose — Stelo CGM 24h Curve (Jul 28, 2026)</div>
         <canvas id="glucoseChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Nocturnal Glucose Floor -->
+    <div class="grid">
+      <div class="card span12">
+        <div class="card-title">🌙 Nocturnal Glucose Floor — Lowest Reading (10 PM – 5 AM)</div>
+        <canvas id="nocturnalChart"></canvas>
+        <div style="margin-top:12px;font-size:0.85rem;color:#64748b;line-height:1.6;">
+          <strong style="color:#0f172a;">Target: floor ≥ 80 mg/dL.</strong> Green bars clear target · amber = 70–79 (thin glycogen buffer) · red = below 70 (hypo threshold).
+          The Jul 22→23 floor of <strong>57</strong> was a genuine sustained low from an empty evening carb runway. After moving to <strong>~137g carbs/day</strong> with a large sweet potato at dinner plus the 8:15 PM bridge snack, the floor lifted to <strong>89–91</strong> — a 34-point improvement.
+          Jul 24–26 is a true sensor gap (transmitter swap), not fabricated data. Jul 28→29 slipped to 78, most likely a riper/faster-releasing banana in the bridge snack.
+        </div>
       </div>
     </div>
 
@@ -233,7 +246,7 @@
 
     <div class="footer">
       <p>🔬 Data sourced from Withings Body Scan, BPM Connect, and Stelo CGM — Auto-refreshes every Sunday @ 9 AM Pacific</p>
-      <p style="margin-top:8px;font-size:0.75rem">Last updated: July 26, 2026</p>
+      <p style="margin-top:8px;font-size:0.75rem">Last updated: July 29, 2026</p>
     </div>
   </div>
 
@@ -396,15 +409,15 @@ new Chart(bpCtx, {
   }
 });
 
-// Glucose Chart (24h curve, July 11, 2026 - Latest Stelo Data)
+// Glucose Chart (24h curve, Jul 28 2026 - Latest Stelo Data)
 const glucoseCtx = document.getElementById('glucoseChart').getContext('2d');
 new Chart(glucoseCtx, {
   type: 'line',
   data: {
-    labels: ['4:02 PM', '4:07 PM', '4:12 PM', '4:17 PM', '4:22 PM', '4:27 PM', '4:32 PM', '4:37 PM', '4:42 PM', '4:47 PM', '4:52 PM', '4:57 PM', '5:02 PM', '5:07 PM'],
+    labels: ['12 AM', '2 AM', '4 AM', '6 AM', '8 AM', '9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM', '4:35 PM', '5 PM', '6 PM', '7 PM', '8:15 PM', '9 PM', '10 PM', '11 PM'],
     datasets: [{
       label: 'Glucose (mg/dL)',
-      data: [142, 131, 121, 115, 110, 110, 109, 98, 99, 109, 102, 95, 102, 98],
+      data: [101, 100, 96, 100, 110, 103, 109, 120, 91, 101, 109, 103, 144, 109, 120, 89, 123, 78, 85, 91],
       borderColor: '#14b8a6',
       backgroundColor: 'rgba(20,184,166,0.1)',
       tension: 0.4,
@@ -439,6 +452,83 @@ new Chart(glucoseCtx, {
           }
         }
       }
+    }
+  }
+});
+
+// Nocturnal Glucose Floor — lowest reading in 10 PM – 5 AM window, per night
+const nocturnalCtx = document.getElementById('nocturnalChart').getContext('2d');
+const nocturnalFloors = [57, 70, null, null, 89, 91, 78];
+const nocturnalNotes = [
+  'Empty evening carb runway — sustained low 00:43–05:00',
+  'Borderline: brief 70 at 03:28, otherwise upper 70s–80s',
+  'Sensor gap — transmitter swap, no data',
+  'Sensor gap — transmitter swap, no data',
+  'First night on the higher-carb protocol',
+  'Best night — 137g carb day + large sweet potato',
+  'Slight dip — likely a riper banana in the bridge snack'
+];
+const floorColor = v => v === null ? 'rgba(148,163,184,.25)' : (v < 70 ? '#ef4444' : (v < 80 ? '#f59e0b' : '#10b981'));
+const nocturnalTargetLine = {
+  id: 'nocturnalTargetLine',
+  afterDatasetsDraw(chart) {
+    const {ctx, chartArea, scales: {y}} = chart;
+    if (!chartArea) return;
+    const drawLine = (val, color, dash, label) => {
+      const yPos = y.getPixelForValue(val);
+      ctx.save();
+      ctx.beginPath();
+      ctx.setLineDash(dash);
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 2;
+      ctx.moveTo(chartArea.left, yPos);
+      ctx.lineTo(chartArea.right, yPos);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = color;
+      ctx.font = '600 11px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+      ctx.textAlign = 'left';
+      ctx.fillText(label, chartArea.left + 6, yPos - 5);
+      ctx.restore();
+    };
+    drawLine(80, 'rgba(16,185,129,.85)', [6, 4], 'Target floor ≥ 80');
+    drawLine(70, 'rgba(239,68,68,.85)', [4, 4], 'Hypo threshold 70');
+  }
+};
+new Chart(nocturnalCtx, {
+  type: 'bar',
+  plugins: [nocturnalTargetLine],
+  data: {
+    labels: ['Jul 22→23', 'Jul 23→24', 'Jul 24→25', 'Jul 25→26', 'Jul 26→27', 'Jul 27→28', 'Jul 28→29'],
+    datasets: [{
+      label: 'Nightly floor (mg/dL)',
+      data: nocturnalFloors,
+      backgroundColor: nocturnalFloors.map(floorColor),
+      borderRadius: 8,
+      animation: { easing: 'easeInOutQuart', duration: 1500 }
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: context => context.parsed.y === null ? 'No data' : 'Floor: ' + context.parsed.y + ' mg/dL',
+          afterBody: items => items.length ? nocturnalNotes[items[0].dataIndex] : ''
+        }
+      }
+    },
+    scales: {
+      y: {
+        beginAtZero: false,
+        min: 50,
+        max: 105,
+        title: { display: true, text: 'Lowest overnight glucose (mg/dL)' },
+        grid: { color: 'rgba(148,163,184,.18)' }
+      },
+      x: { grid: { display: false } }
     }
   }
 });
