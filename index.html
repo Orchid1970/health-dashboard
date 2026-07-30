@@ -127,6 +127,127 @@
   .span5 { grid-column: span 5; }
   .span6 { grid-column: span 6; }
   .span12 { grid-column: span 12; }
+  /* ===== Cyber-HUD scope: applies ONLY inside .hud ===== */
+  .hud {
+    position: relative;
+    background:
+      radial-gradient(circle at 12% 18%, rgba(34,211,238,.10), transparent 42%),
+      radial-gradient(circle at 88% 82%, rgba(56,189,248,.08), transparent 46%),
+      linear-gradient(160deg, #050b1a 0%, #0a1628 52%, #071120 100%);
+    border: 1px solid rgba(34,211,238,.42);
+    border-radius: 18px;
+    padding: 26px 24px 20px;
+    margin-bottom: 24px;
+    box-shadow: inset 0 0 0 1px rgba(34,211,238,.10), 0 18px 48px rgba(3,10,26,.55), 0 0 34px rgba(34,211,238,.14);
+    overflow: hidden;
+  }
+  .hud::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(34,211,238,.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(34,211,238,.045) 1px, transparent 1px);
+    background-size: 46px 46px;
+    pointer-events: none;
+  }
+  .hud > * { position: relative; z-index: 1; }
+  .hud-head { text-align: center; margin-bottom: 22px; }
+  .hud-title {
+    font-size: 1.85rem; font-weight: 800; letter-spacing: .06em;
+    text-transform: uppercase; color: #e0f7ff; line-height: 1.18;
+    text-shadow: 0 0 14px rgba(34,211,238,.55);
+  }
+  .hud-title .accent { color: #22d3ee; }
+  .hud-sub {
+    margin-top: 6px; font-size: .76rem; letter-spacing: .22em;
+    text-transform: uppercase; color: #7dd3fc;
+  }
+  .hud-rule {
+    height: 1px; margin: 16px auto 0; max-width: 520px;
+    background: linear-gradient(90deg, transparent, rgba(34,211,238,.75), transparent);
+  }
+  .hud-section {
+    position: relative; margin-top: 30px;
+    border: 1px solid rgba(34,211,238,.30); border-radius: 14px;
+    padding: 30px 18px 18px;
+  }
+  .hud-tab {
+    position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+    background: linear-gradient(180deg, #0c2438, #08192a);
+    border: 1px solid rgba(34,211,238,.55); border-radius: 999px;
+    padding: 5px 20px; font-size: .72rem; font-weight: 800;
+    letter-spacing: .18em; text-transform: uppercase; color: #67e8f9;
+    white-space: nowrap; box-shadow: 0 0 18px rgba(34,211,238,.28);
+  }
+  .hud-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; }
+  .hud-stat {
+    text-align: center; background: rgba(8,24,40,.72);
+    border: 1px solid rgba(34,211,238,.24); border-radius: 12px; padding: 14px 10px;
+  }
+  .hud-stat .n {
+    font-size: 2.1rem; font-weight: 800; color: #22d3ee; line-height: 1;
+    text-shadow: 0 0 16px rgba(34,211,238,.5);
+  }
+  .hud-stat .l {
+    margin-top: 6px; font-size: .66rem; letter-spacing: .16em;
+    text-transform: uppercase; color: #94b8d4;
+  }
+  .hud-flow { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px; }
+  .hud-chip {
+    background: rgba(8,24,40,.8); border: 1px solid rgba(34,211,238,.34);
+    border-radius: 10px; padding: 8px 13px; text-align: center;
+  }
+  .hud-chip .t { font-size: .92rem; font-weight: 800; color: #67e8f9; }
+  .hud-chip .d {
+    font-size: .63rem; letter-spacing: .1em; text-transform: uppercase;
+    color: #94b8d4; margin-top: 2px;
+  }
+  .hud-arrow { color: #22d3ee; font-size: 1.05rem; opacity: .8; }
+  .hud-legend { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+  .hud-lg {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-size: .68rem; letter-spacing: .09em; text-transform: uppercase;
+    color: #b8d4e8; background: rgba(8,24,40,.62);
+    border: 1px solid rgba(34,211,238,.2); border-radius: 999px; padding: 5px 12px;
+  }
+  .hud-dot { width: 9px; height: 9px; border-radius: 999px; flex: 0 0 auto; }
+  .hud-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(252px, 1fr)); gap: 13px; }
+  .hud-card {
+    background: linear-gradient(165deg, rgba(10,28,46,.94), rgba(7,19,33,.94));
+    border: 1px solid rgba(34,211,238,.20);
+    border-left: 3px solid #38bdf8;
+    border-radius: 12px; padding: 13px 14px;
+  }
+  .hud-card .pn { font-size: .93rem; font-weight: 800; color: #e0f7ff; }
+  .hud-card .pd { font-size: .72rem; color: #7dd3fc; margin: 4px 0 8px; letter-spacing: .04em; }
+  .hud-card .pb { font-size: .76rem; color: #a8c6dd; line-height: 1.55; }
+  .hud-pill {
+    display: inline-block; font-size: .58rem; font-weight: 800;
+    letter-spacing: .1em; text-transform: uppercase;
+    padding: 2px 8px; border-radius: 999px; margin-left: 6px;
+  }
+  .t-rct { border-left-color: #4ade80; }
+  .t-rct .hud-pill { background: rgba(74,222,128,.15); color: #86efac; border: 1px solid rgba(74,222,128,.4); }
+  .t-hum { border-left-color: #38bdf8; }
+  .t-hum .hud-pill { background: rgba(56,189,248,.15); color: #7dd3fc; border: 1px solid rgba(56,189,248,.4); }
+  .t-ani { border-left-color: #fbbf24; }
+  .t-ani .hud-pill { background: rgba(251,191,36,.15); color: #fcd34d; border: 1px solid rgba(251,191,36,.4); }
+  .t-mech { border-left-color: #a78bfa; }
+  .t-mech .hud-pill { background: rgba(167,139,250,.15); color: #c4b5fd; border: 1px solid rgba(167,139,250,.4); }
+  .t-fail {
+    border-left-color: #f87171;
+    background: linear-gradient(165deg, rgba(46,14,20,.94), rgba(30,10,14,.94));
+  }
+  .t-fail .hud-pill { background: rgba(248,113,113,.16); color: #fca5a5; border: 1px solid rgba(248,113,113,.45); }
+  .hud-foot {
+    margin-top: 22px; border: 1px solid rgba(34,211,238,.34); border-radius: 999px;
+    padding: 9px 14px; text-align: center; font-size: .64rem; font-weight: 700;
+    letter-spacing: .14em; text-transform: uppercase; color: #7dd3fc;
+    background: rgba(8,24,40,.6);
+  }
+  .hud-note { margin-top: 16px; font-size: .76rem; color: #8fb2cc; line-height: 1.62; }
+  .hud-note strong { color: #e0f7ff; }
+  #peptideChart { max-height: 470px; }
   canvas { max-height: 350px; }
   .footer {
     text-align: center;
@@ -140,6 +261,10 @@
   @media (max-width: 768px) {
     .grid { grid-template-columns: 1fr; }
     .span4, .span5, .span6, .span12 { grid-column: span 1; }
+    .hud-grid { grid-template-columns: 1fr; }
+    .hud-title { font-size: 1.3rem; }
+    .hud-flow { flex-direction: column; }
+    .hud-arrow { transform: rotate(90deg); }
     .header h1 { font-size: 2rem; }
   }
 </style>
@@ -150,6 +275,122 @@
       <h1>🏋️ Timothy — Health Progress Infographic</h1>
       <p>Last Updated: July 29, 2026</p>
     </div>
+
+    <!-- ===== Cyber-HUD: Peptide Protocol Stack (curated static content — preserve verbatim) ===== -->
+    <section class="hud">
+      <div class="hud-head">
+        <div class="hud-title">TIMOTHY: <span class="accent">PEPTIDE PROTOCOL STACK</span></div>
+        <div class="hud-sub">Dosing Clock &middot; Evidence Tiers &middot; Benefit Mapping</div>
+        <div class="hud-rule"></div>
+      </div>
+
+      <div class="hud-stats">
+        <div class="hud-stat"><div class="n">12</div><div class="l">Compounds</div></div>
+        <div class="hud-stat"><div class="n">4</div><div class="l">Dosing Blocks</div></div>
+        <div class="hud-stat"><div class="n">2</div><div class="l">On Human RCT</div></div>
+        <div class="hud-stat"><div class="n">1</div><div class="l">Flagged For Removal</div></div>
+      </div>
+
+      <div class="hud-section">
+        <div class="hud-tab">Daily Protocol Flow</div>
+        <div class="hud-flow">
+          <div class="hud-chip"><div class="t">4:30 AM</div><div class="d">Fasted &middot; GH Pulse</div></div>
+          <span class="hud-arrow">&#9654;</span>
+          <div class="hud-chip"><div class="t">7:30 AM</div><div class="d">Post-Training &middot; Repair</div></div>
+          <span class="hud-arrow">&#9654;</span>
+          <div class="hud-chip"><div class="t">8:00 AM</div><div class="d">First Meal</div></div>
+          <span class="hud-arrow">&#9654;</span>
+          <div class="hud-chip"><div class="t">8:30 PM</div><div class="d">Pre-Sleep</div></div>
+        </div>
+      </div>
+
+      <div class="hud-section">
+        <div class="hud-tab">Dosing Clock &mdash; Daily Timeline</div>
+        <canvas id="peptideChart"></canvas>
+      </div>
+
+      <div class="hud-section">
+        <div class="hud-tab">Evidence Tier Legend</div>
+        <div class="hud-legend">
+          <span class="hud-lg"><span class="hud-dot" style="background:#4ade80"></span>Human RCT</span>
+          <span class="hud-lg"><span class="hud-dot" style="background:#38bdf8"></span>Limited / Regional Human</span>
+          <span class="hud-lg"><span class="hud-dot" style="background:#fbbf24"></span>Animal / Weak Human</span>
+          <span class="hud-lg"><span class="hud-dot" style="background:#a78bfa"></span>Mechanism Only</span>
+          <span class="hud-lg"><span class="hud-dot" style="background:#f87171"></span>RCT &mdash; Failed Endpoint</span>
+        </div>
+      </div>
+
+      <div class="hud-section">
+        <div class="hud-tab">Compound Detail &amp; Benefits</div>
+        <div class="hud-grid">
+          <div class="hud-card t-rct">
+            <div class="pn">Retatrutide<span class="hud-pill">Human RCT</span></div>
+            <div class="pd">4 mg &middot; 2&times;/week (8 mg/wk) &middot; 4:30 AM fasted</div>
+            <div class="pb">Triple GLP-1 / GIP / glucagon agonist &mdash; fat loss and appetite regulation. Phase 2 data, NEJM 2023.</div>
+          </div>
+          <div class="hud-card t-hum">
+            <div class="pn">CJC-1295 (no DAC)<span class="hud-pill">Limited Human</span></div>
+            <div class="pd">100 mcg &middot; daily &middot; 4:30 AM fasted</div>
+            <div class="pb">GHRH analog driving a pulsatile GH release into IGF-1. Human PK exists for the DAC form; no-DAC half-life figures are widely quoted but not primary-sourced.</div>
+          </div>
+          <div class="hud-card t-hum">
+            <div class="pn">Ipamorelin<span class="hud-pill">Human Safety</span></div>
+            <div class="pd">200&ndash;300 mcg &middot; daily &middot; 4:30 AM fasted</div>
+            <div class="pb">Selective GHS-R agonist &mdash; amplifies the GH pulse without the prolactin or cortisol rise seen with older secretagogues.</div>
+          </div>
+          <div class="hud-card t-hum">
+            <div class="pn">ARA-290 (Cibinetide)<span class="hud-pill">Small Human Trial</span></div>
+            <div class="pd">Per vial label &middot; daily &middot; 4:30 AM fasted</div>
+            <div class="pb">Innate repair receptor agonist &mdash; neuropathic and anti-inflammatory signaling. Small Phase 2 data.</div>
+          </div>
+          <div class="hud-card t-fail">
+            <div class="pn">AOD-9604<span class="hud-pill">RCT &mdash; Failed Phase 2b</span></div>
+            <div class="pd">300 mcg &middot; daily &middot; 4:30 AM fasted</div>
+            <div class="pb">Intended lipolysis without GH's glucose effects. Six RCTs showed modest results but the 24-week Phase 2b missed its endpoint and the program was shelved. Flagged for removal.</div>
+          </div>
+          <div class="hud-card t-rct">
+            <div class="pn">SS-31 (Elamipretide)<span class="hud-pill">Human RCT</span></div>
+            <div class="pd">5&ndash;10 mg &middot; Mon/Wed/Fri &middot; 7:30 AM post-training</div>
+            <div class="pb">Stabilizes cardiolipin on the inner mitochondrial membrane &mdash; improves electron transport and reduces ROS leak.</div>
+          </div>
+          <div class="hud-card t-ani">
+            <div class="pn">KLOW (BPC-157 &middot; TB-500 &middot; GHK-Cu &middot; KPV)<span class="hud-pill">Animal / Preclinical</span></div>
+            <div class="pd">Per vial label &middot; daily &middot; 7:30 AM post-training</div>
+            <div class="pb">Tissue repair, angiogenesis and collagen signaling. GHK-Cu is copper-dependent &mdash; relevant with serum copper at 75 &micro;g/dL. Human injectable data is thin; most evidence is animal.</div>
+          </div>
+          <div class="hud-card t-hum">
+            <div class="pn">Semax<span class="hud-pill">Regional Human Data</span></div>
+            <div class="pd">Per vial label &middot; 7:30 AM post-training</div>
+            <div class="pb">Nootropic, BDNF-linked. Clinical use and literature are largely Russian.</div>
+          </div>
+          <div class="hud-card t-hum">
+            <div class="pn">Selank<span class="hud-pill">Regional Human Data</span></div>
+            <div class="pd">Per vial label &middot; 7:30 AM post-training</div>
+            <div class="pb">Anxiolytic via GABA / serotonin modulation. Clinical use and literature are largely Russian.</div>
+          </div>
+          <div class="hud-card t-mech">
+            <div class="pn">NAD+<span class="hud-pill">Mechanism Only</span></div>
+            <div class="pd">Per vial label &middot; daily &middot; 8:00 AM with first meal</div>
+            <div class="pb">Sirtuin substrate, shifts the NAD+/NADH ratio. Injectable human RCTs are absent &mdash; benefit is extrapolated from oral precursor trials. Requires a slow 10&ndash;15 min push to limit flushing and nausea.</div>
+          </div>
+          <div class="hud-card t-hum">
+            <div class="pn">Glutathione<span class="hud-pill">Limited Human</span></div>
+            <div class="pd">Per vial label &middot; Mon/Wed/Fri &middot; 8:00 AM with first meal</div>
+            <div class="pb">Master antioxidant and phase II detox support. Injectable human data is limited. Keep 30&ndash;60 min and a different site from GHK-Cu &mdash; co-formulating strips the copper.</div>
+          </div>
+          <div class="hud-card t-ani">
+            <div class="pn">DSIP<span class="hud-pill">Weak Human Evidence</span></div>
+            <div class="pd">100&ndash;300 mcg &middot; Sun&ndash;Thu &middot; 8:30 PM pre-sleep</div>
+            <div class="pb">Intended to deepen slow-wave sleep. Human literature is thin and contradictory &mdash; a small 1981 study was positive, a 1992 double-blind study was not.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hud-foot">Evidence Tiered &middot; Doses Verified &middot; 4 Blocks &middot; 12 Compounds &middot; AOD-9604 Flagged</div>
+      <div class="hud-note">
+        <strong>Evidence tiers are shown on purpose.</strong> Only Retatrutide and SS-31 sit on positive human randomized data. KLOW is animal / preclinical. Injectable NAD+ is mechanism-extrapolated from oral precursor trials. DSIP's human literature is thin and contradictory. AOD-9604 is kept visible rather than deleted &mdash; its Phase 2b missed endpoint earns the red flag, but all protocol changes are on hold until the remaining labs land. Doses appear only where they have actually been set; &ldquo;per vial label&rdquo; means no figure has been established.
+      </div>
+    </section>
 
     <!-- 3-Year Transformation Timeline -->
     <div class="grid">
@@ -627,6 +868,90 @@ new Chart(activityCtx, {
       y: {
         beginAtZero: true,
         title: { display: true, text: 'Steps' }
+      }
+    }
+  }
+});
+
+// ===== Cyber-HUD: Peptide dosing clock (inline dark theme only — no Chart.defaults changes) =====
+const peptideCtx = document.getElementById('peptideChart').getContext('2d');
+const pep = [
+  {n:'Retatrutide',               w:[4.5,4.95],   c:'#4ade80', dose:'4 mg \u00b7 2\u00d7/wk (8 mg/wk)',       tier:'Human RCT \u2014 Phase 2',   b:'Triple GLP-1/GIP/glucagon agonist \u2014 fat loss, appetite regulation'},
+  {n:'CJC-1295 (no DAC)',         w:[4.5,4.95],   c:'#38bdf8', dose:'100 mcg \u00b7 daily',                  tier:'Limited human',              b:'GHRH analog \u2014 pulsatile GH release driving IGF-1'},
+  {n:'Ipamorelin',                w:[4.5,4.95],   c:'#38bdf8', dose:'200\u2013300 mcg \u00b7 daily',         tier:'Human safety',               b:'Selective GHS-R agonist \u2014 GH pulse without prolactin/cortisol rise'},
+  {n:'ARA-290',                   w:[4.5,4.95],   c:'#38bdf8', dose:'Per vial label \u00b7 daily',           tier:'Small human trial',          b:'Innate repair receptor \u2014 neuropathic and anti-inflammatory signaling'},
+  {n:'AOD-9604',                  w:[4.5,4.95],   c:'#f87171', dose:'300 mcg \u00b7 daily',                  tier:'RCT \u2014 FAILED Phase 2b',  b:'Intended lipolysis; program shelved after missed endpoint. Flagged for removal.'},
+  {n:'SS-31 (Elamipretide)',      w:[7.5,7.95],   c:'#4ade80', dose:'5\u201310 mg \u00b7 Mon/Wed/Fri',       tier:'Human RCT',                  b:'Cardiolipin stabilization \u2014 mitochondrial electron transport, less ROS leak'},
+  {n:'KLOW (BPC/TB4/GHK-Cu/KPV)', w:[7.5,7.95],   c:'#fbbf24', dose:'Per vial label \u00b7 daily',           tier:'Animal / preclinical',       b:'Tissue repair, angiogenesis, collagen signaling \u2014 GHK-Cu is copper-dependent'},
+  {n:'Semax',                     w:[7.5,7.95],   c:'#38bdf8', dose:'Per vial label',                        tier:'Regional human data',        b:'Nootropic, BDNF-linked'},
+  {n:'Selank',                    w:[7.5,7.95],   c:'#38bdf8', dose:'Per vial label',                        tier:'Regional human data',        b:'Anxiolytic \u2014 GABA/serotonin modulation'},
+  {n:'NAD+',                      w:[8.0,8.5],    c:'#a78bfa', dose:'Per vial label \u00b7 daily',           tier:'Mechanism only',             b:'Sirtuin substrate, NAD+/NADH ratio \u2014 slow 10\u201315 min push required'},
+  {n:'Glutathione',               w:[8.0,8.5],    c:'#38bdf8', dose:'Per vial label \u00b7 Mon/Wed/Fri',     tier:'Limited human',              b:'Master antioxidant, phase II detox support'},
+  {n:'DSIP',                      w:[20.5,20.95], c:'#fbbf24', dose:'100\u2013300 mcg \u00b7 Sun\u2013Thu',  tier:'Weak human evidence',        b:'Slow-wave sleep depth \u2014 literature thin and contradictory'}
+];
+new Chart(peptideCtx, {
+  type: 'bar',
+  data: {
+    labels: pep.map(p => p.n),
+    datasets: [{
+      data: pep.map(p => p.w),
+      backgroundColor: pep.map(p => p.c),
+      borderColor: pep.map(p => p.c),
+      borderWidth: 1,
+      borderSkipped: false,
+      borderRadius: 3,
+      barPercentage: 0.72,
+      categoryPercentage: 0.9
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: false,
+    animation: { easing: 'easeInOutQuart', duration: 1500 },
+    layout: { padding: { top: 4, right: 14 } },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: 'rgba(5,15,28,.96)',
+        borderColor: 'rgba(34,211,238,.5)',
+        borderWidth: 1,
+        titleColor: '#67e8f9',
+        bodyColor: '#c7e4f5',
+        padding: 12,
+        displayColors: false,
+        callbacks: {
+          title: items => pep[items[0].dataIndex].n,
+          label: item => {
+            const p = pep[item.dataIndex];
+            return ['Dose: ' + p.dose, 'Evidence: ' + p.tier, '', p.b];
+          }
+        }
+      }
+    },
+    scales: {
+      x: {
+        min: 3,
+        max: 22,
+        ticks: {
+          stepSize: 2,
+          color: '#7dd3fc',
+          font: { size: 10 },
+          callback: v => {
+            const h = ((v % 24) + 24) % 24;
+            const ap = h < 12 ? 'AM' : 'PM';
+            const hr = (h % 12) || 12;
+            return hr + ap;
+          }
+        },
+        grid: { color: 'rgba(34,211,238,.12)' },
+        border: { color: 'rgba(34,211,238,.30)' },
+        title: { display: true, text: 'TIME OF DAY', color: '#67e8f9', font: { size: 10, weight: 'bold' } }
+      },
+      y: {
+        ticks: { color: '#c7e4f5', font: { size: 10.5 } },
+        grid: { display: false },
+        border: { color: 'rgba(34,211,238,.30)' }
       }
     }
   }
