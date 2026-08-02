@@ -255,6 +255,16 @@
   .hud-note { margin-top: 16px; font-size: .76rem; color: #8fb2cc; line-height: 1.62; }
   .hud-note strong { color: #e0f7ff; }
   #peptideChart { max-height: 470px; }
+  #trainingChart { max-height: 320px; }
+  .trn-card {
+    background: rgba(8,20,32,.55);
+    border: 1px solid rgba(34,211,238,.22);
+    border-radius: 10px;
+    padding: 13px;
+  }
+  .trn-card .tn { font-size: .93rem; font-weight: 800; color: #e0f7ff; }
+  .trn-card .td { font-size: .72rem; color: #7dd3fc; margin: 4px 0 8px; letter-spacing: .04em; }
+  .trn-card .tb { font-size: .76rem; color: #a8c6dd; line-height: 1.55; }
   canvas { max-height: 350px; }
   .footer {
     text-align: center;
@@ -399,6 +409,103 @@
       </div>
     </section>
 
+    <!-- ===== Cyber-HUD: Training Protocol (rebuilt weekly from data/training_load.json) ===== -->
+    <section class="hud hud-training">
+      <div class="hud-head">
+        <div class="hud-title">TIMOTHY: <span class="accent">TRAINING PROTOCOL</span></div>
+        <div class="hud-sub">Walk Block &middot; Lift Block &middot; Weekly Target</div>
+        <div class="hud-rule"></div>
+      </div>
+
+      <div class="hud-section">
+        <div class="hud-tab">DAILY RHYTHM</div>
+        <div class="hud-flow">
+          <div class="hud-chip"><div class="t">4:00&ndash;4:30 AM</div><div class="d">Fasted peptides</div></div>
+          <span class="hud-arrow">&rarr;</span>
+          <div class="hud-chip"><div class="t">5:20&ndash;6:25 AM</div><div class="d">Walk &mdash; Alma + dog</div></div>
+          <span class="hud-arrow">&rarr;</span>
+          <div class="hud-chip"><div class="t">6:30&ndash;6:45 AM</div><div class="d">Bridge walk</div></div>
+          <span class="hud-arrow">&rarr;</span>
+          <div class="hud-chip"><div class="t">6:50&ndash;7:35 AM</div><div class="d">LIFT &mdash; 45 min</div></div>
+          <span class="hud-arrow">&rarr;</span>
+          <div class="hud-chip"><div class="t">7:45 AM</div><div class="d">Post-training peptides</div></div>
+          <span class="hud-arrow">&rarr;</span>
+          <div class="hud-chip"><div class="t">8:30 AM</div><div class="d">First meal</div></div>
+        </div>
+      </div>
+
+      <div class="hud-section">
+        <div class="hud-tab">WEEKLY LOAD &mdash; 4-WEEK AVERAGE &rarr; TARGET</div>
+        <div class="hud-stats">
+          <div class="hud-stat"><div class="n">80 &rarr; 135</div><div class="l">LIFT MIN PER WEEK</div></div>
+          <div class="hud-stat"><div class="n">3.2 &rarr; 3</div><div class="l">SESSIONS PER WEEK</div></div>
+          <div class="hud-stat"><div class="n">25 &rarr; 45</div><div class="l">MIN PER SESSION</div></div>
+          <div class="hud-stat"><div class="n">6.8 : 1 &rarr; 4.0 : 1</div><div class="l">AEROBIC : RESISTANCE</div></div>
+          <div class="hud-stat"><div class="n">465</div><div class="l">WALK MIN PER WEEK &mdash; PROTECTED</div></div>
+        </div>
+      </div>
+
+      <div class="hud-section">
+        <div class="hud-tab">SESSION LOG &mdash; LIFT MINUTES VS 45 MIN TARGET</div>
+        <canvas id="trainingChart"></canvas>
+      </div>
+
+      <div class="hud-section">
+        <div class="hud-tab">BLOCK STRUCTURE</div>
+        <div class="hud-grid">
+          <div class="trn-card">
+            <div class="tn">Walk Block &mdash; Protected</div>
+            <div class="td">465 min/week &middot; HR 71&ndash;96 &middot; intensity 26&ndash;45 &middot; mostly zone 0</div>
+            <div class="tb">Non-negotiable connection time with Alma and the dog. This is roughly 465 minutes a week of zone-0 NEAT and it is a primary driver of visceral fat at 4.5 and vascular age at 55.3. The lift change does not touch it &mdash; walk volume is held, not traded.</div>
+          </div>
+          <div class="trn-card">
+            <div class="tn">Lift Block &mdash; Scaling Up</div>
+            <div class="td">80 &rarr; 135 min/week &middot; 3 &times; 25 min &rarr; 3 &times; 45 min &middot; intensity 50&ndash;56 &middot; HR 102&ndash;111</div>
+            <div class="tb">Session frequency is already right at three days a week &mdash; only duration changes. Going from about 25 minutes to 45 raises weekly resistance volume roughly 69% and pulls the aerobic-to-resistance ratio from 6.8:1 toward 4.0:1. Weekly set volume is the variable most tightly tied to hypertrophy.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hud-foot">Walk Protected &middot; Lift 3 &times; 45 &middot; Ratio Target 4.0 : 1 &middot; Fasted Block ~105 min</div>
+      <div class="hud-note">
+        <strong>Fuel flag.</strong> Walk plus a 45-minute lift is roughly 105 minutes of fasted training in one block. The nocturnal floor has recovered to 78&ndash;91 mg/dL, but that is still a thin tank for a resistance session at the tail end of it. Check the CGM mid-lift for the first two weeks and keep 10&ndash;15 g of fast carbs within reach. A sub-70 reading mid-session is the signal to add a small pre-lift carb &mdash; not to shorten the session.
+      </div>
+    </section>
+
+    <!-- Key Metrics -->
+    <div class="metric-grid">
+      <div class="metric-card" style="border-left:4px solid #2563eb">
+        <div class="label">Weight</div>
+        <div class="value">180.2 lbs</div>
+        <div class="sub">5-scan avg (81.73 kg)</div>
+      </div>
+      <div class="metric-card" style="border-left:4px solid #ef4444">
+        <div class="label">Body Fat %</div>
+        <div class="value">23.23%</div>
+        <div class="sub">5-scan avg &middot; target 18%</div>
+      </div>
+      <div class="metric-card" style="border-left:4px solid #10b981">
+        <div class="label">Muscle Mass</div>
+        <div class="value">131.4 lbs</div>
+        <div class="sub">5-scan avg (59.61 kg)</div>
+      </div>
+      <div class="metric-card" style="border-left:4px solid #8b5cf6">
+        <div class="label">Visceral Fat</div>
+        <div class="value">4.56</div>
+        <div class="sub">Excellent (under 5)</div>
+      </div>
+      <div class="metric-card" style="border-left:4px solid #f59e0b">
+        <div class="label">Lift Min / Week</div>
+        <div class="value">80 &rarr; 135</div>
+        <div class="sub">target 3 &times; 45 min</div>
+      </div>
+      <div class="metric-card" style="border-left:4px solid #06b6d4">
+        <div class="label">Nocturnal Floor</div>
+        <div class="value">73 mg/dL</div>
+        <div class="sub">last night &middot; target &ge; 80</div>
+      </div>
+    </div>
+
     <!-- 3-Year Transformation Timeline -->
     <div class="grid">
       <div class="card span12">
@@ -407,38 +514,24 @@
       </div>
     </div>
 
-    <!-- Body Composition Snapshot -->
+    <!-- 90-Day Body Composition Trend -->
     <div class="grid">
-      <div class="card" style="grid-column:span 5">
-        <div class="card-title">⚖️ Current Weight (7-Day Average)</div>
-        <h1 class="text-5xl font-bold mb-2">175.8 lbs <span class="text-3xl text-gray-600">(79.76 kg)</span></h1>
-      <div style="font-size:11px;color:var(--muted);margin-top:6px">7-scan trailing avg: <b style="color:#10b981">175.8 lbs</b> (stable muscle-sparing cut)</div>
+      <div class="card span12">
+        <div class="card-title">📊 90-Day Body Composition Trend</div>
+        <canvas id="bodyCompChart"></canvas>
+        <p style="margin-top:14px;color:var(--muted);font-size:.85rem">Weight and muscle mass read on the left axis in pounds; body fat percent on the right. Body Scan uses multi-frequency bioimpedance, so any single day carries hydration noise &mdash; the trend line matters far more than one reading. The late-July rise to 181.4 lbs was glycogen and water from the deliberate carb increase, not fat gain, and it is already resolving.</p>
       </div>
+    </div>
 
-      <div class="card" style="grid-column:span 7">
-        <div class="card-title">🔬 Body Composition — Latest (7-Day Trailing)</div>
-        <div class="metric-grid">
-                    <div class="metric-card">
-                        <div class="label">Body Fat %</div>
-                        <div class="text-3xl font-semibold text-red-600">23.13%</div>
-                        <div class="text-sm text-gray-500">↓ Trending down</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="label">Muscle Mass</div>
-                        <div class="text-3xl font-bold text-gray-900">128.5 lbs</div>
-                        <div class="text-sm text-gray-500">(58.28 kg)</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="label">Visceral Fat</div>
-                        <div class="text-3xl font-bold text-gray-900">4.49</div>
-                        <div class="text-sm text-gray-500">Excellent (under 5)</div>
-                    </div>
-                    <div class="metric-card" style="border-left:4px solid #f59e0b">
-                        <div class="text-sm font-medium text-gray-500">Vascular Age</div>
-                        <div class="text-3xl font-bold text-gray-900">55.61</div>
-                        <div class="text-sm text-gray-500">7-day avg (yrs)</div>
-                    </div>
-        </div>
+    <!-- Training Load + Activity -->
+    <div class="grid">
+      <div class="card span6">
+        <div class="card-title">🏋️ Weekly Training Load (8 Weeks)</div>
+        <canvas id="trainingLoadChart"></canvas>
+      </div>
+      <div class="card span6">
+        <div class="card-title">🏃 Daily Activity (Last 7 Days)</div>
+        <canvas id="activityChart"></canvas>
       </div>
     </div>
 
@@ -451,29 +544,17 @@
       </div>
     </div>
 
-    <!-- Heart Rate -->
-    <div class="grid">
-      <div class="card span12">
-        <div class="card-title">❤️ Resting Heart Rate (Evening)</div>
-        <canvas id="hrChart"></canvas>
-      </div>
-    </div>
-
     <!-- Glucose Chart -->
     <div class="grid">
-      <div class="card span12">
-        <div class="card-title">🩸 Glucose — Stelo CGM 24h Curve (Jul 28, 2026)</div>
+      <div class="card span6">
+        <div class="card-title">🩸 Glucose — Stelo CGM 24h Curve (Aug 1, 2026)</div>
         <canvas id="glucoseChart"></canvas>
       </div>
-    </div>
-
-    <!-- Nocturnal Glucose Floor -->
-    <div class="grid">
-      <div class="card span12">
+      <div class="card span6">
         <div class="card-title">🌙 Nocturnal Glucose Floor — Lowest Reading (10 PM – 5 AM)</div>
         <canvas id="nocturnalChart"></canvas>
         <div style="margin-top:12px;font-size:0.85rem;color:#64748b;line-height:1.6;">
-          <strong style="color:#0f172a;">Target: floor ≥ 80 mg/dL.</strong> Green bars clear target · amber = 70–79 (thin glycogen buffer) · red = below 70 (hypo threshold).
+          <strong style="color:#0f172a;">Target: floor ≥ 80 mg/dL.</strong> Green bars clear target · amber = 70–79 (thin glycogen buffer) · red = below 70 (hypo threshold). Floors are the lowest reading in the 10 PM – 5 AM window, which deliberately excludes the ~8:49 PM compression artifacts. <strong style="color:#0f172a;">Watch the slope:</strong> the floor peaked at 91 on Jul 27→28 and has drifted down every night since — 78, 80, 79, 77, and 73 last night. That is an 18-point slide off the peak, with the last three nights below the 80 target. The higher-carb protocol fixed the sustained 57 low, but the evening carb is now releasing too fast to hold through 4 AM. A greener banana or a swap to ⅓ cup dry oats is the next lever — not more total carbs.
           The Jul 22→23 floor of <strong>57</strong> was a genuine sustained low from an empty evening carb runway. After moving to <strong>~137g carbs/day</strong> with a large sweet potato at dinner plus the 8:15 PM bridge snack, the floor lifted to <strong>89–91</strong> — a 34-point improvement.
           Jul 24–26 is a true sensor gap (transmitter swap), not fabricated data. Jul 28→29 slipped to 78, most likely a riper/faster-releasing banana in the bridge snack.
         </div>
@@ -487,14 +568,14 @@
         <canvas id="visceralChart"></canvas>
       </div>
       <div class="card span6">
-        <div class="card-title">🏃 Daily Activity (Last 7 Days)</div>
-        <canvas id="activityChart"></canvas>
+        <div class="card-title">❤️ Resting Heart Rate (Evening)</div>
+        <canvas id="hrChart"></canvas>
       </div>
     </div>
 
     <div class="footer">
       <p>🔬 Data sourced from Withings Body Scan, BPM Connect, and Stelo CGM — Auto-refreshes every Sunday @ 9 AM Pacific</p>
-      <p style="margin-top:8px;font-size:0.75rem">Last updated: July 29, 2026</p>
+      <p style="margin-top:8px;font-size:0.75rem">Last updated: August 2, 2026</p>
     </div>
   </div>
 
@@ -504,6 +585,82 @@ Chart.defaults.font.size = 13;
 Chart.defaults.color = '#374151';
 
 // 3-Year Transformation Timeline (July 2023 → July 2026)
+// ===== Training Protocol: lift session log (dark HUD theme, INLINE only) =====
+// Themed inline on purpose -- do NOT hoist any of this into Chart.defaults,
+// that would drag the light-themed charts below into dark mode.
+const trainingLabels    = ["Jul 12", "Jul 14", "Jul 16", "Jul 18", "Jul 20", "Jul 24", "Jul 26", "Jul 27", "Jul 29", "Jul 30"];
+const trainingMinutes   = [30, 20, 20, 30, 30, 30, 30, 30, 20, 20];
+const trainingIntensity = [44, 50, 43, 48, 53, 47, 50, 52, 52, 56];
+const trainingHr        = [94, 103, 92, 100, 107, 99, 102, 105, 106, 111];
+const TRAINING_TARGET   = 45;
+
+const trainingCtx = document.getElementById('trainingChart').getContext('2d');
+new Chart(trainingCtx, {
+  type: 'bar',
+  data: {
+    labels: trainingLabels,
+    datasets: [
+      {
+        label: 'Lift minutes',
+        data: trainingMinutes,
+        backgroundColor: trainingMinutes.map(function (v) {
+          if (v >= 45) { return '#22d39a'; }
+          if (v >= 30) { return '#f59e0b'; }
+          return '#ef4444';
+        }),
+        borderRadius: 4,
+        order: 2
+      },
+      {
+        label: 'Target 45 min',
+        type: 'line',
+        data: trainingLabels.map(function () { return TRAINING_TARGET; }),
+        borderColor: '#22d3ee',
+        borderDash: [6, 4],
+        borderWidth: 2,
+        pointRadius: 0,
+        fill: false,
+        order: 1
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { labels: { color: '#a8c6dd', usePointStyle: true, boxWidth: 8 } },
+      tooltip: {
+        backgroundColor: 'rgba(8,20,32,.95)',
+        titleColor: '#e0f7ff',
+        bodyColor: '#a8c6dd',
+        borderColor: 'rgba(34,211,238,.35)',
+        borderWidth: 1,
+        callbacks: {
+          afterBody: function (items) {
+            const i = items[0].dataIndex;
+            if (items[0].datasetIndex !== 0) { return ''; }
+            const out = [];
+            if (trainingIntensity[i] !== null) { out.push('Intensity: ' + trainingIntensity[i]); }
+            if (trainingHr[i] !== null) { out.push('HR avg: ' + trainingHr[i] + ' bpm'); }
+            const gap = TRAINING_TARGET - trainingMinutes[i];
+            out.push(gap > 0 ? (gap + ' min under target') : 'target met');
+            return out;
+          }
+        }
+      }
+    },
+    scales: {
+      x: { ticks: { color: '#7dd3fc' }, grid: { display: false } },
+      y: {
+        min: 0, max: 60,
+        title: { display: true, text: 'Minutes', color: '#7dd3fc' },
+        ticks: { color: '#7dd3fc' },
+        grid: { color: 'rgba(34,211,238,.12)' }
+      }
+    }
+  }
+});
+
 const transformCtx = document.getElementById('transformChart').getContext('2d');
 new Chart(transformCtx, {
   type: 'line',
@@ -570,6 +727,70 @@ new Chart(transformCtx, {
 });
 
 // 2-Year Blood Pressure Preview — monthly medians from deduplicated readings
+// 90-Day Body Composition Trend (light theme - inherits Chart.defaults)
+new Chart(document.getElementById('bodyCompChart').getContext('2d'), {
+  type: 'line',
+  data: {
+    labels: ["2026-05-05", "2026-05-08", "2026-05-09", "2026-05-11", "2026-05-13", "2026-05-19", "2026-05-20", "2026-05-21", "2026-05-22", "2026-05-26", "2026-05-29", "2026-06-01", "2026-06-03", "2026-06-04", "2026-06-05", "2026-06-06", "2026-06-08", "2026-06-10", "2026-06-11", "2026-06-11", "2026-06-12", "2026-06-16", "2026-06-17", "2026-06-19", "2026-06-23", "2026-06-26", "2026-06-27", "2026-06-28", "2026-06-30", "2026-07-03", "2026-07-03", "2026-07-04", "2026-07-06", "2026-07-07", "2026-07-08", "2026-07-10", "2026-07-11", "2026-07-13", "2026-07-14", "2026-07-15", "2026-07-20", "2026-07-23", "2026-07-27", "2026-07-28", "2026-07-29", "2026-07-30", "2026-07-31"],
+    datasets: [
+      { label:'Weight (lbs)', data:[187.3, 182.7, 181.3, 187.1, 182.9, 185.4, 184.9, 183.8, 181.2, 186.0, 182.6, 184.2, 181.4, 179.0, 181.9, 182.9, 182.6, 181.2, 180.0, 179.9, 180.3, 181.0, 182.0, 181.9, 180.3, 179.9, 180.5, 182.3, 179.9, 178.6, 178.4, 179.3, 181.6, 178.5, 177.9, 178.5, 174.9, 178.3, 176.9, 174.3, 176.6, 175.8, 181.4, 180.7, 180.6, 179.9, 178.3], borderColor:'#10b981',
+        backgroundColor:'rgba(16,185,129,.06)', yAxisID:'y', tension:.3, pointRadius:2,
+        borderWidth:2.5, spanGaps:true, fill:true },
+      { label:'Muscle Mass (lbs)', data:[134.3, 132.1, 130.6, 136.3, 133.2, 133.2, 131.2, 131.2, 131.9, 137.5, 132.5, 135.1, 129.9, 129.0, 132.4, 135.0, 134.3, 129.7, 132.9, 132.5, 129.9, 130.1, 133.9, 133.5, 132.8, 131.5, 133.2, 136.3, 130.2, 129.2, 129.8, 130.4, 130.8, 128.6, 129.6, 129.6, 127.3, 127.2, 128.9, 128.8, 129.1, 129.7, 133.0, 130.5, 132.9, 130.6, 130.2], borderColor:'#2563eb',
+        yAxisID:'y', tension:.3, pointRadius:2, borderWidth:2.5, spanGaps:true, fill:false },
+      { label:'Body Fat %', data:[24.5, 23.89, 24.18, 23.31, 23.32, 24.36, 25.3, 24.81, 23.39, 22.21, 23.61, 22.81, 24.59, 24.15, 23.39, 22.28, 22.6, 24.62, 22.25, 22.52, 24.18, 24.3, 22.55, 22.74, 22.46, 23.03, 22.27, 21.3, 23.83, 23.86, 23.43, 23.44, 24.17, 24.12, 23.32, 23.55, 23.39, 24.87, 23.24, 22.17, 23.01, 22.37, 22.82, 24.02, 22.59, 23.56, 23.16], borderColor:'#ef4444',
+        yAxisID:'y1', borderDash:[5,4], tension:.3, pointRadius:2, borderWidth:2, spanGaps:true, fill:false }
+    ]
+  },
+  options: {
+    responsive:true, maintainAspectRatio:true,
+    interaction:{ mode:'index', intersect:false },
+    plugins:{ legend:{ display:true, position:'top' } },
+    scales:{
+      x:{ ticks:{ maxTicksLimit:12, maxRotation:45 }, grid:{ color:'rgba(148,163,184,.15)' } },
+      y:{ type:'linear', position:'left', title:{ display:true, text:'Pounds' },
+          suggestedMin:125, suggestedMax:190 },
+      y1:{ type:'linear', position:'right', title:{ display:true, text:'Body Fat %' },
+          suggestedMin:20, suggestedMax:28, grid:{ drawOnChartArea:false } }
+    }
+  }
+});
+
+// Weekly Training Load - stacked minutes with aerobic:resistance ratio overlay
+new Chart(document.getElementById('trainingLoadChart').getContext('2d'), {
+  type: 'bar',
+  data: {
+    labels: ["W24", "W25", "W26", "W27", "W28", "W29", "W30", "W31"],
+    datasets: [
+      { label:'Walk', data:[497, 417, 454, 482, 466, 455, 452, 488], backgroundColor:'#93c5fd', stack:'m', order:3 },
+      { label:'Lift', data:[102, 110, 80, 60, 90, 70, 90, 70], backgroundColor:'#f59e0b', stack:'m', order:3 },
+      { label:'Other cardio', data:[81, 61, 70, 90, 80, 91, 51, 81], backgroundColor:'#a78bfa', stack:'m', order:3 },
+      { label:'Aerobic to Resistance', data:[5.67, 4.35, 6.55, 9.53, 6.07, 7.8, 5.59, 8.13], type:'line', yAxisID:'y1',
+        borderColor:'#ef4444', backgroundColor:'#ef4444', borderWidth:2,
+        pointRadius:3, tension:.3, spanGaps:true, fill:false, order:1 }
+    ]
+  },
+  options: {
+    responsive:true, maintainAspectRatio:true,
+    interaction:{ mode:'index', intersect:false },
+    plugins:{
+      legend:{ display:true, position:'top' },
+      tooltip:{ callbacks:{ label:function(c){
+        if (c.dataset.label === 'Aerobic to Resistance') {
+          return c.parsed.y === null ? 'Ratio: n/a' : 'Ratio: ' + c.parsed.y + ' to 1';
+        }
+        return c.dataset.label + ': ' + c.parsed.y + ' min';
+      } } }
+    },
+    scales:{
+      x:{ stacked:true, grid:{ display:false } },
+      y:{ stacked:true, title:{ display:true, text:'Minutes / week' }, beginAtZero:true },
+      y1:{ position:'right', title:{ display:true, text:'Aerobic to Resistance' },
+           beginAtZero:true, suggestedMax:10, grid:{ drawOnChartArea:false } }
+    }
+  }
+});
+
 const bpCtx = document.getElementById('bpChart').getContext('2d');
 const bpMonthlyCounts = [10,2,6,2,2,0,4,1,0,2,0,0,0,0,1,0,19,38,9,4,4,3,6,9,6];
 const bpStageBands = {
@@ -706,16 +927,8 @@ new Chart(glucoseCtx, {
 
 // Nocturnal Glucose Floor — lowest reading in 10 PM – 5 AM window, per night
 const nocturnalCtx = document.getElementById('nocturnalChart').getContext('2d');
-const nocturnalFloors = [57, 70, null, null, 89, 91, 78];
-const nocturnalNotes = [
-  'Empty evening carb runway — sustained low 00:43–05:00',
-  'Borderline: brief 70 at 03:28, otherwise upper 70s–80s',
-  'Sensor gap — transmitter swap, no data',
-  'Sensor gap — transmitter swap, no data',
-  'First night on the higher-carb protocol',
-  'Best night — 137g carb day + large sweet potato',
-  'Slight dip — likely a riper banana in the bridge snack'
-];
+const nocturnalFloors = [89.0, 91.0, 78.0, 80.0, 79.0, 77.0, 73.0];
+const nocturnalNotes = ["Recovered floor — higher-carb protocol holding", "Best night — 137g carb day + large sweet potato", "Slight dip — likely a riper, faster-releasing banana", "Holding low-80s", "Upper-70s — bridge snack releasing too fast", "Below target — watch the bridge snack composition", "Lowest of the week — tighten the evening carb"];
 const floorColor = v => v === null ? 'rgba(148,163,184,.25)' : (v < 70 ? '#ef4444' : (v < 80 ? '#f59e0b' : '#10b981'));
 const nocturnalTargetLine = {
   id: 'nocturnalTargetLine',
@@ -747,7 +960,7 @@ new Chart(nocturnalCtx, {
   type: 'bar',
   plugins: [nocturnalTargetLine],
   data: {
-    labels: ['Jul 22→23', 'Jul 23→24', 'Jul 24→25', 'Jul 25→26', 'Jul 26→27', 'Jul 27→28', 'Jul 28→29'],
+    labels: ["Jul 26→27", "Jul 27→28", "Jul 28→29", "Jul 29→30", "Jul 30→31", "Jul 31→1", "Aug 1→2"],
     datasets: [{
       label: 'Nightly floor (mg/dL)',
       data: nocturnalFloors,
