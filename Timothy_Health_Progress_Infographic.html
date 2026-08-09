@@ -883,10 +883,10 @@ const glucoseCtx = document.getElementById('glucoseChart').getContext('2d');
 new Chart(glucoseCtx, {
   type: 'line',
   data: {
-    labels: ["7:15 AM", "6:40 AM", "6:05 AM", "5:30 AM", "4:55 AM", "4:20 AM", "3:45 AM", "3:10 AM", "2:35 AM", "2:00 AM", "1:25 AM", "12:50 AM", "12:15 AM", "11:40 PM", "11:05 PM", "10:30 PM", "9:55 PM", "9:20 PM", "8:45 PM", "8:10 PM"],
+    labels: ["7:15 AM", "6:45 AM", "6:15 AM", "5:45 AM", "5:15 AM", "4:45 AM", "4:15 AM", "3:45 AM", "3:15 AM", "2:45 AM", "2:15 AM", "1:45 AM", "1:15 AM", "12:45 AM", "12:15 AM", "11:45 PM", "11:15 PM", "10:45 PM", "10:15 PM", "9:45 PM"],
     datasets: [{
       label: 'Glucose (mg/dL)',
-      data: [97, 93, 94, 97, 97, 96, 97, 99, 90, 101, 103, 100, 94, 96, 109, 115, 96, 99, 79, 125],
+      data: [97, 91, 95, 97, 99, 98, 93, 97, 96, 100, 102, 108, 99, 100, 94, 95, 99, 109, 110, 94],
       borderColor: '#14b8a6',
       backgroundColor: 'rgba(20,184,166,0.1)',
       tension: 0.4,
@@ -1031,7 +1031,7 @@ new Chart(visceralCtx, {
     labels: ['Visceral Fat', 'Vascular Age'],
     datasets: [{
       label: '7-Day Avg',
-      data: [4.6, 55.61],
+      data: [4.6, 56.8],
       backgroundColor: ['#10b981', '#f59e0b'],
       animation: { easing: 'easeInOutQuart', duration: 1500 },
       borderRadius: 8
