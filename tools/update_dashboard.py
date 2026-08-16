@@ -458,7 +458,50 @@ def main():
             else:
                 gaps.append("transform body fat regex did not match — patch skipped")
 
-    # ── Write back ────────────────────────────────────────────────────────────
+    # ── PATCH 10: Narrative / HUD live actuals (glucose title, walk-block) ─────
+    # Glucose card title date → newest CGM reading date
+    try:
+        g_readings = glucose["readings"] if isinstance(glucose, dict) else glucose
+        if g_readings:
+            newest_ts = g_readings[0][0].replace("T", " ")
+            g_dt = datetime.datetime.strptime(newest_ts, "%Y-%m-%d %H:%M")
+            g_label = g_dt.strftime("%b %-d, %Y")
+            html, ok = sub1(
+                r"(Stelo CGM 24h Curve \()[A-Za-z]+ \d{1,2}, \d{4}(\))",
+                lambda m: m.group(1) + g_label + m.group(2),
+                html
+            )
+            if ok:
+                patches_applied.append(f"glucose_title_date ({g_label})")
+    except Exception as e:
+        gaps.append(f"glucose title date not patched: {e}")
+
+    # Walk-block live actuals: 4-week rolling walk minutes + current visceral/vascular
+    weekly_all = training.get("weekly", [])
+    complete_wks = [w for w in weekly_all if w.get("lift_min") is not None][:-1] if len(weekly_all) > 1 else weekly_all
+    last4 = complete_wks[-4:]
+    if last4 and sessions_bc:
+        avg_walk = round(sum(w.get("walk_min", 0) for w in last4) / len(last4))
+        vf_now = next((row.get("visceral_fat") for row in sessions_bc if row.get("visceral_fat") is not None), None)
+        va_now = next((row.get("vascular_age") for row in sessions_bc if row.get("vascular_age") is not None), None)
+        if vf_now is not None and va_now is not None:
+            # "roughly 465 minutes a week ... visceral fat at 4.5 and vascular age at 55.3"
+            html, ok = sub1(
+                r"(roughly )\d+( minutes a week of zone-0 NEAT and it is a primary driver of visceral fat at )[\d.]+( and vascular age at )[\d.]+",
+                lambda m: m.group(1) + str(avg_walk) + m.group(2) + f"{float(vf_now):.1f}" + m.group(3) + f"{float(va_now):.1f}",
+                html
+            )
+            if ok:
+                patches_applied.append(f"walk_block_actuals (walk {avg_walk}, vf {vf_now}, va {va_now})")
+            # walk-block td line: "465 min/week"
+            html, ok2 = sub1(
+                r"(<div class=\"td\">)\d+( min/week &middot; HR 71)",
+                lambda m: m.group(1) + str(avg_walk) + m.group(2),
+                html
+            )
+            if ok2:
+                patches_applied.append(f"walk_block_td ({avg_walk} min/week)")
+
     with open(DASHBOARD, "w", encoding="utf-8") as fh:
         fh.write(html)
 
