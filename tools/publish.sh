@@ -45,6 +45,7 @@ git checkout -B "$BRANCH" >/dev/null 2>&1
 git add "$SRC" index.html
 if git diff --cached --quiet; then
   echo "NOTE: no content change to commit"
+  exit 0
 else
   git -c user.email="escam02g@gmail.com" -c user.name="Timothy Escamilla" \
       commit -q -m "Weekly health dashboard refresh $(TZ='America/Los_Angeles' date +%Y-%m-%d)"

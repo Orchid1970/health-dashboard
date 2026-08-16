@@ -883,10 +883,10 @@ const glucoseCtx = document.getElementById('glucoseChart').getContext('2d');
 new Chart(glucoseCtx, {
   type: 'line',
   data: {
-    labels: ["4:45 PM", "3:35 PM", "2:25 PM", "1:15 PM", "12:05 PM", "10:55 AM", "9:45 AM", "8:35 AM", "7:25 AM", "6:15 AM", "5:05 AM", "3:55 AM", "2:20 AM", "1:10 AM", "12:00 AM", "10:50 PM", "9:40 PM", "8:30 PM", "7:20 PM", "6:10 PM"],
+    labels: ["4:45 PM", "5:55 PM", "7:05 PM", "8:15 PM", "9:25 PM", "10:35 PM", "11:45 PM", "12:55 AM", "2:05 AM", "3:40 AM", "4:50 AM", "6:00 AM", "7:10 AM", "8:20 AM", "9:30 AM", "10:40 AM", "11:50 AM", "1:00 PM", "2:10 PM", "4:45 PM"],
     datasets: [{
       label: 'Glucose (mg/dL)',
-      data: [104, 104, 115, 97, 113, 101, 99, 99, 94, 98, 97, 96, 98, 89, 93, 87, 99, 125, 93, 100],
+      data: [101, 100, 96, 109, 112, 91, 90, 103, 94, 90, 94, 98, 92, 101, 99, 100, 118, 96, 112, 104],
       borderColor: '#14b8a6',
       backgroundColor: 'rgba(20,184,166,0.1)',
       tension: 0.4,
@@ -1062,10 +1062,10 @@ const activityCtx = document.getElementById('activityChart').getContext('2d');
 new Chart(activityCtx, {
   type: 'bar',
   data: {
-    labels: ["2026-03-22", "2026-03-23", "2026-03-25", "2026-03-26", "2026-03-27", "2026-03-28", "2026-03-29"],
+    labels: ["Aug 9", "Aug 10", "Aug 11", "Aug 12", "Aug 13", "Aug 14", "Aug 15"],
     datasets: [{
       label: 'Steps',
-      data: [0, 0, 0, 0, 0, 0, 0],
+      data: [10669, 12403, 11049, 12180, 11477, 10566, 12116],
       backgroundColor: '#3b82f6',
       animation: { easing: 'easeInOutQuart', duration: 1500 },
       borderRadius: 8
