@@ -388,8 +388,43 @@ def main():
         )
         if ok:
             patches_applied.append("training_hr")
-    else:
-        gaps.append("No lift sessions found in training_load.json — training chart not updated")
+
+    # ── PATCH 8b: Weekly Training Load chart (trainingLoadChart) ─────────────
+    weekly = training.get("weekly", [])
+    if weekly:
+        w_labels = [w["week"].split("-")[-1] for w in weekly]      # W27..W33
+        w_walk   = [w.get("walk_min", 0)   for w in weekly]
+        w_lift   = [w.get("lift_min", 0)   for w in weekly]
+        w_cardio = [w.get("cardio_min", 0) for w in weekly]
+        w_ratio  = [w.get("ratio")         for w in weekly]
+
+        # Anchor on the trainingLoadChart block and replace its labels + 4 datasets.
+        def _tl_sub(pattern, repl):
+            nonlocal html
+            new, n = re.subn(pattern, repl, html, count=1, flags=re.DOTALL)
+            if n:
+                html = new
+                return True
+            return False
+
+        tl_ok = False
+        # labels array (first labels: after trainingLoadChart)
+        m = re.search(r"getElementById\('trainingLoadChart'\).*?Aerobic to Resistance', data:\[.*?\]", html, re.DOTALL)
+        if m:
+            block = m.group(0)
+            block2 = re.sub(r"labels:\s*\[.*?\]", "labels: " + json.dumps(w_labels), block, count=1, flags=re.DOTALL)
+            block2 = re.sub(r"(label:'Walk', data:)\[.*?\]", lambda mm: mm.group(1) + json.dumps(w_walk), block2, count=1, flags=re.DOTALL)
+            block2 = re.sub(r"(label:'Lift', data:)\[.*?\]", lambda mm: mm.group(1) + json.dumps(w_lift), block2, count=1, flags=re.DOTALL)
+            block2 = re.sub(r"(label:'Other cardio', data:)\[.*?\]", lambda mm: mm.group(1) + json.dumps(w_cardio), block2, count=1, flags=re.DOTALL)
+            block2 = re.sub(r"(label:'Aerobic to Resistance', data:)\[.*?\]", lambda mm: mm.group(1) + json.dumps(w_ratio), block2, count=1, flags=re.DOTALL)
+            if block2 != block:
+                html = html.replace(block, block2, 1)
+                tl_ok = True
+        if tl_ok:
+            patches_applied.append("training_weekly_load")
+        else:
+            gaps.append("trainingLoadChart weekly block not patched")
+
 
     # ── PATCH 9: 3-Year Transformation chart (last data point only) ───────────
     if sessions_bc:
