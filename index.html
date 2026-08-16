@@ -588,10 +588,10 @@ Chart.defaults.color = '#374151';
 // ===== Training Protocol: lift session log (dark HUD theme, INLINE only) =====
 // Themed inline on purpose -- do NOT hoist any of this into Chart.defaults,
 // that would drag the light-themed charts below into dark mode.
-const trainingLabels    = ["Aug 23", "Sep 6", "Nov 14", "Nov 17", "Nov 21", "Nov 24", "Nov 27"];
-const trainingMinutes   = [56, 40, 36, 35, 57, 46, 31];
-const trainingIntensity = [50, 50, 50, 50, 50, 50, 50];
-const trainingHr        = [97, 94, 113, 113, 110, 104, 106];
+const trainingLabels    = ["Jul 29", "Jul 30", "Aug 4", "Aug 5", "Aug 6", "Aug 9", "Aug 10", "Aug 12", "Aug 14", "Aug 15"];
+const trainingMinutes   = [20, 20, 30, 30, 20, 30, 30, 30, 20, 45];
+const trainingIntensity = [52, 56, 51, 48, 52, 44, 55, 51, 50, 55];
+const trainingHr        = [106, 111, 104, 100, 105, 94, 110, 104, 103, 110];
 const TRAINING_TARGET   = 45;
 
 const trainingCtx = document.getElementById('trainingChart').getContext('2d');
@@ -760,12 +760,12 @@ new Chart(document.getElementById('bodyCompChart').getContext('2d'), {
 new Chart(document.getElementById('trainingLoadChart').getContext('2d'), {
   type: 'bar',
   data: {
-    labels: ["W24", "W25", "W26", "W27", "W28", "W29", "W30", "W31"],
+    labels: ["W27", "W28", "W29", "W30", "W31", "W32", "W33"],
     datasets: [
-      { label:'Walk', data:[497, 417, 454, 482, 466, 455, 452, 488], backgroundColor:'#93c5fd', stack:'m', order:3 },
-      { label:'Lift', data:[102, 110, 80, 60, 90, 70, 90, 70], backgroundColor:'#f59e0b', stack:'m', order:3 },
-      { label:'Other cardio', data:[81, 61, 70, 90, 80, 91, 51, 81], backgroundColor:'#a78bfa', stack:'m', order:3 },
-      { label:'Aerobic to Resistance', data:[5.67, 4.35, 6.55, 9.53, 6.07, 7.8, 5.59, 8.13], type:'line', yAxisID:'y1',
+      { label:'Walk', data:[295, 466, 455, 452, 488, 411, 406], backgroundColor:'#93c5fd', stack:'m', order:3 },
+      { label:'Lift', data:[30, 90, 70, 90, 70, 110, 125], backgroundColor:'#f59e0b', stack:'m', order:3 },
+      { label:'Other cardio', data:[50, 80, 91, 51, 100, 50, 30], backgroundColor:'#a78bfa', stack:'m', order:3 },
+      { label:'Aerobic to Resistance', data:[11.5, 6.07, 7.8, 5.59, 8.4, 4.19, 3.49], type:'line', yAxisID:'y1',
         borderColor:'#ef4444', backgroundColor:'#ef4444', borderWidth:2,
         pointRadius:3, tension:.3, spanGaps:true, fill:false, order:1 }
     ]
